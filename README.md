@@ -1,25 +1,24 @@
-# Calculator App
-Very basic calculator application created by Java **Swing**. 
+Debuggers-CSC439
 
-[![License MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+Bhuwan
+Kachew
+Faikat
+Besirat
+Abebe
+Naomi 
 
-### Screenshoot
-Sample           |   Colored
-:---------------------:|:-----------------
-![Calculator - screenshoot](screenshots/sample_calculator_v1.1.png) | ![Calculator - screenshoot](screenshots/colored_calculator_v1.1.png)
+It uses Java, HTML, CSS, PHP, SQL.
 
-### Requirements 🔧
-* Java version 8 or higher.
+	Bug Fixes: 
+•	Toggle button for color effect is not working properly(Java Fx)
+•	Buttons disappearing when toggle button is clicked
+•	Output display pane is not configured to work properly since it cuts of the digits before the decimal point (if the                  answer has numerous digits after the decimal points).
 
-### Installation 🔌
-1. Press the **Fork** button (top right the page) to save copy of this project on your account.
+       Refactoring:
+•	The class calculator  is more than 400 lines of code, meaning we will need to break it down into multiple pieces of code so assigning tasks and enhancing the code will be easier and more clear.
 
-2. Download the repository files (project) from the download section or clone this project by typing in the bash the following command:
+      Program Enhancements:
+•	We are going to add more buttons to the calculator like Trigonometric functions, square roots, powers and others.
+•	One of the things we’re planning to do is have a BMI button which is going to have a separate page for itself which is              going to let users create account and login to their account so they can access their information
+•	Also with the use of API we can connect users to fitness trainers in their areas if interested
 
-       git clone https://github.com/HouariZegai/Calculator.git
-3. Imported it in Intellij IDEA.
-4. Run the application :D
-
-### Contributing 💡
-If you want to contribute to this project and make it better with new ideas, your pull request is very welcomed.
-If you find any issue just put it in the repository issue section, thank you.
