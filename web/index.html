@@ -17,10 +17,13 @@
 			.descr{
 				color: #ff9933;
 			}
+			.calc-color{
+				color: #ff9933;		
+			}
 		</style>
 	</head>
 	<body>
-
+        ..l
 		<!-- Banner -->
 			<section id="banner" style="color:black">
 				<h2>BMI Calculator</h2>
@@ -78,16 +81,15 @@
 				</div>
 			</section>
 			
-			<div style= "margin-left: 30%; width: 40%;">
-                <h3> <b>Enter your height and weight in feet and pound respectively </b>:<br>Example: weight = 150, height = 5.11</h3>
+			<div id = "calculate" style= "margin-left: 30%; margin-bottom: 40px; width: 40%; background-color:honeydew">
+				<h3> <b>Enter your height and weight in feet and pound respectively </b>:<br>Example: weight = 150, height = 5.11</h3>
 					<Label>Height</Label>
-					<input type = "number" id="height">
+					<input type = "text" id="height">
 					<Label>Weight</Label>
-					<input type ="number" id="weight"><br>
-					<input type ="submit" value="calculate!">
-					<br>
-				
+					<input type = "text" id="weight"><br>
+				<input type = "button" onclick="myFunction();" value="Calculate!" style = "margin-top: 10px;">
 			</div>
+			
 
 		<!-- Two -->
 			<section id="two" class="wrapper style2 special">
@@ -127,6 +129,6 @@
 			<script src="assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
-
+			<script type="text/javascript" src ="calc.js"></script>
 	</body>
 </html>
