@@ -11,6 +11,7 @@ import java.awt.Color;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.lang.NumberFormatException;
 
 public class Calculator {
 
@@ -18,7 +19,7 @@ public class Calculator {
     private JTextField inText, affichageCalc; // Input Text
     private JButton btnC, btnBack, btnMod, btnDiv, btn7, btn8, btn9,
             btnMul, btn4, btn5, btn6, btnSub, btn1, btn2, btn3, btnAdd, btnPoint, btn0, btnEqual,btnSqrt,btnCos,
-            btnMC, btnMR, btnMplus,btnMS, colorChoice,btnBMI,btnTan,btnSin;
+            btnMC, btnMR, btnMplus,btnMS, colorChoice,btnBMI,btnTan,btnSin, btnFactorial,btnInverse;
     private char opt = ' ';             // Storage Oparator
     private boolean go = true,          // Faire Calcule Avec Opt != (=)
             addWrite = true;    // RacordÈ des Nombres dans l'Affichage
@@ -29,7 +30,7 @@ public class Calculator {
 
     private Calculator() {
         window = new JFrame("Calculator");
-        window.setSize(610,630); // Height And Width Of Window
+        window.setSize(600,680); // Width and Height Of Window
         window.setLocationRelativeTo(null); // Move Window To Center
         
         Font btnFont = new Font("Comic Sans MS", Font.PLAIN, 28);
@@ -50,8 +51,8 @@ public class Calculator {
         int marginY = 60;
         int j = -1;
         int k = -1;
-        int[] x = {marginX, marginX + 90, 200, 290, marginX+370, marginX+470};
-        int[] y = {marginY, marginY + 100, marginY + 180, marginY + 260, marginY + 340, marginY + 420};
+        int[] x = {marginX, marginX + 90, 200, 290, marginX+370, marginX+470,marginX+570,};
+        int[] y = {marginY, marginY + 100, marginY + 180, marginY + 260, marginY + 340, marginY + 420,marginY + 500};
 
         inText = new JTextField("0");
         inText.setBounds(x[0],y[0],545,70);
@@ -532,16 +533,7 @@ public class Calculator {
         });
         window.getContentPane().add(btnEqual);
         window.getContentPane().setLayout(null);
-        /*
-        btnSqrt = new JButton("sqrt");
-        btnSqrt.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent arg0) {
-            }
-        });
-        btnSqrt.setBounds(385, 160, 96, 70);
-        window.getContentPane().add(btnSqrt);
-        */
+       
          btnMC = new JButton("MC");
          btnEqual.setFont(btnFont);
          btnMC.setBounds(x[4],y[3],wBtn,hBtn);
@@ -561,15 +553,60 @@ public class Calculator {
         btnEqual.setFont(btnFont);
         btnMplus.setBounds(x[4],y[2],wBtn,hBtn);
         window.getContentPane().add(btnMplus);
-       
+        
+        
+        
+       // Add factorial button and its functionality
+        btnFactorial = new JButton("X!");
+        btnFactorial.setFont(btnFont);
+        btnFactorial.setBounds(x[5], y[5], wBtn, hBtn);
+        window.getContentPane().add(btnFactorial);
+      btnFactorial.setCursor(new Cursor(Cursor.HAND_CURSOR));
+      btnFactorial.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+
+          int n = Integer.parseInt(inText.getText());
+          int f = 1;
+          if (e.getSource().equals(btnFactorial)) {
+
+              for (int i = 1; i <= n; i++) {
+                  f = f * i;
+              }
+
+             inText.setText(String.valueOf("The Factorial of  " + n + " " + "is :" + f));
+          }
+
+      }
+      });
+      
+      
+   // Inverse button calculates the inverse of a given number
+      btnInverse = new JButton("1/x");
+      btnInverse.setFont(btnFont);
+      btnInverse.setBounds(x[5], y[6], wBtn, hBtn);
+      window.getContentPane().add(btnInverse);
+      btnInverse.setCursor(new Cursor(Cursor.HAND_CURSOR));
+      btnInverse.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+          double val = Double.parseDouble(inText.getText());
+          double inverse=0;
+         if (e.getSource().equals(btnInverse)) {
+         inverse=1.0/val;
+           inText.setText(String.valueOf(inverse));
+        }
+
+    }
+    });
+      
         btnBMI = new JButton("BMI");
         btnBMI.setBounds(x[5],y[4],wBtn,hBtn);
         window.getContentPane().add(btnBMI);
         btnBMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                open("https://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmicalc.htm"); // just what is the 'open' method?
+                open("https://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmicalc.htm"); // call the method open
             }
 
+            //method to open a URL using the user's default browser
             private void open(String string) {
                 try {
                     Desktop.getDesktop().browse(new URL("https://www.nhlbi.nih.gov/health/educational/lose_wt/BMI/bmicalc.htm").toURI());
@@ -646,6 +683,7 @@ public class Calculator {
              btnMC.setForeground(Color.BLACK);
              btnMplus.setForeground(Color.BLACK);
              btnMR.setForeground(Color.BLACK);
+             btnFactorial.setForeground(Color.BLACK);
              btnSqrt.setBackground(null);
              btnMS.setBackground(null);
              btnMC.setBackground(null);
@@ -655,6 +693,8 @@ public class Calculator {
              btnSin.setBackground(null);
              btnCos.setBackground(null);
              btnTan.setBackground(null);
+             btnFactorial.setBackground(null);
+             btnInverse.setBackground(null);
              bool = false;
          } else {
              colorChoice.setText("Untoggle");
@@ -696,6 +736,8 @@ public class Calculator {
              btnCos.setBackground(Color.ORANGE);
              btnTan.setBackground(Color.ORANGE);
              btnSin.setBackground(Color.ORANGE);
+             btnFactorial.setBackground(Color.ORANGE);
+             btnInverse.setBackground(Color.ORANGE);
              bool = true;
         }
 }
