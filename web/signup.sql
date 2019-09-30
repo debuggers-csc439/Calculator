@@ -1,0 +1,1 @@
+insert into customers values (NULL, :name, :email, :password)

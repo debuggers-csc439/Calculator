@@ -1,3 +1,21 @@
+<?php
+$user = 'debuggers';
+$password = 'Debuggers@349';
+$database = new PDO('mysql:host=198.71.225.51:3306;dbname=db_bmi', $user, $password);
+if($_SERVER['REQUEST_METHOD'] == "POST"){
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $params = array(
+        'name' => $name,
+        'email' => $email,
+        'password' => $password
+    );
+    $sql = file_get_contents('signup.sql');
+    $statement = $database->prepare($sql);
+    $statement->execute($params);
+}
+?>
 <!DOCTYPE HTML>
 <!--
 	Typify by TEMPLATED
@@ -23,9 +41,12 @@
 		</style>
 	</head>
 	<body>
-        ..l
-		<!-- Banner -->
-			<section id="banner" style="color:black">
+        <!-- Banner -->
+            <section id="banner" style="color:black">
+                <?php
+                if(isset($_POST['name'])):?>
+                <h2> Hello <?php echo $_POST['name']; ?>! here's your customized BMI calculator
+                <?php endif; ?>
 				<h2>BMI Calculator</h2>
 				<p><strong>BMI</strong> Calculator with added Sign up features to record your health status</p>
 				<!--<ul class="actions">
@@ -98,7 +119,7 @@
 					<header>
 						<h2>Signup for free!</h2>
 					</header>
-					<form class="grid-form" method="post" action="signup.php">
+					<form class="grid-form" method="post" action="index.php">
 						<div class="form-control narrow">
 							<label for="name">Full Name</label>
 							<input name="name" id="name" type="text" required>
