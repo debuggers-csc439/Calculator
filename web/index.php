@@ -1,19 +1,42 @@
 <?php
-$user = 'debuggers';
-$password = 'Debuggers@349';
-$database = new PDO('mysql:host=198.71.225.51:3306;dbname=db_bmi', $user, $password);
+include('config.php');
+$loggedin = false;
 if($_SERVER['REQUEST_METHOD'] == "POST"){
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $params = array(
-        'name' => $name,
-        'email' => $email,
-        'password' => $password
-    );
-    $sql = file_get_contents('signup.sql');
-    $statement = $database->prepare($sql);
-    $statement->execute($params);
+	if($_POST['submit'] == 'signup'){
+		$name = $_POST['name'];
+    	$email = $_POST['email'];
+		$temp_password = $_POST['password'];
+		$password = password_hash($temp_password, PASSWORD_BCRYPT);
+    	$params = array(
+        	'name' => $name,
+        	'email' => $email,
+        	'password' => $password
+    	);
+   		$sql = file_get_contents('signup.sql');
+    	$statement = $database->prepare($sql);
+		$statement->execute($params);
+		
+	}
+	if($_POST['submit'] == 'login'){
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+		$params = array(
+			'email' => $email
+		);
+		$loggedin = false;
+		$sql = file_get_contents('login.sql');
+		$statement = $database->prepare($sql);
+		$statement->execute($params);
+		$users = $statement->fetchAll(PDO::FETCH_ASSOC);
+		if(!empty($users)){
+			foreach($users as $user){
+				if(password_verify($password, $user['password'])){
+					$loggedin = true;
+					$person = $user;
+				}
+			}
+		}
+	}
 }
 ?>
 <!DOCTYPE HTML>
@@ -43,9 +66,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 	<body>
         <!-- Banner -->
             <section id="banner" style="color:black">
-                <?php
-                if(isset($_POST['name'])):?>
-                <h2> Hello <?php echo $_POST['name']; ?>! here's your customized BMI calculator
+                <!--
+                echo $_POST['name'];
+                echo $_POST['email'];
+                echo $_POST['password];
+                select * from customers
+                This showed everything within the customers table 
+        -->		
+				<?php if($loggedin): ?>
+                <h2> Hello <?php echo $person['name']; ?>! here's your customized BMI calculator </h2>
                 <?php endif; ?>
 				<h2>BMI Calculator</h2>
 				<p><strong>BMI</strong> Calculator with added Sign up features to record your health status</p>
@@ -53,12 +82,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 					<li><a href="#" class="button special">Get started</a></li>
 				</ul> -->
 				<div style = "color: black; width : 40%; margin-left: 30%;">
+				<form method = "post" action = "index.php">
 					<h3>Login</h3>
-                	<Label> Username: </Label>
-					<input type = "text" name = "username">
+                	<Label> Email: </Label>
+					<input type = "email" name = "email">
 					<Label> Password: </Label>
 					<input type = "password" name = "password"><br>
-					<input type = "submit" value = "Login">
+					<input name = "submit" type = "submit" value = "login">
+				</form>
 				</div>
 			</section>
 				
@@ -130,10 +161,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 						</div>
 						<div class="form-control">
 							<label for="password">Password</label>
-							<input name="password" id="password" rows="4" required> </input>
+							<input name="password" id="password" rows="4" type = "password" required> </input>
 						</div>
 						<ul class="actions">
-							<li><input value="Signup" type="submit"></li>
+							<li><input name = "submit" value="signup" type="submit"></li>
 						</ul>
 					</form>
 					<h2> If you already have an account <i><a href="#top">click here</a></i></h2>
