@@ -18,7 +18,8 @@ public class Calculator {
     private JTextField inText, affichageCalc; // Input Text
     private JButton btnC, btnBack, btnMod, btnDiv, btn7, btn8, btn9,
             btnMul, btn4, btn5, btn6, btnSub, btn1, btn2, btn3, btnAdd, btnPoint, btn0, btnEqual,btnSqrt,btnCos,
-            btnMC, btnMR, btnMplus,btnMS, colorChoice,btnBMI,btnTan,btnSin, btnFactorial ,btnInverse, btnLog,btnln, btnExponential;
+            btnMC, btnMR, btnMplus,btnMS, colorChoice,btnBMI,btnTan,btnSin, btnFactorial ,btnInverse, btnLog,btnln,
+            btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan;
     private char opt = ' ';             // Storage Oparator
     private boolean go = true,          // Faire Calcule Avec Opt != (=)
             addWrite = true;    // RacordÈ des Nombres dans l'Affichage
@@ -29,11 +30,11 @@ public class Calculator {
 
     private Calculator() {
         window = new JFrame("Calculator");
-        window.setSize(700,620); // Height And Width Of Window
+        window.setSize(795,620); // Width and Height Of Window
         window.setLocationRelativeTo(null); // Move Window To Center
         
-        Font btnFont = new Font("Comic Sans MS", Font.PLAIN, 28);
-        Font btnfont = new Font("Comic Sans MS", Font.PLAIN, 18);
+        Font btnFont = new Font("Times New Roman", Font.PLAIN, 18);
+        Font btnfont = new Font("Times New Roman", Font.PLAIN, 18);
         colorChoice = new JButton();
         colorChoice.setBounds(528, 10, 140, 30);
         colorChoice.setText("Toggle colors");
@@ -50,14 +51,14 @@ public class Calculator {
         int marginY = 60;
         int j = -1;
         int k = -1;
-        int[] x = {marginX, marginX + 90, 200, 290, marginX+370, marginX+470,marginX + 570};
-        int[] y = {marginY, marginY + 100, marginY + 180, marginY + 260, marginY + 340, marginY + 420, marginY +500 };
+        int[] x = {marginX, marginX + 90, 200, 290, marginX+370, marginX+470,marginX + 570 , marginX + 670};
+        int[] y = {marginY, marginY + 100, marginY + 180, marginY + 260, marginY + 340, marginY + 420, marginY +500, marginY +650};
 
         inText = new JTextField("0");
-        inText.setBounds(x[0],y[0],650,70);
+        inText.setBounds(x[0],y[0],750,70);
         inText.setEditable(false);
         inText.setBackground(Color.WHITE);
-        inText.setFont(new Font("Comic Sans MS", Font.PLAIN, 33));
+        inText.setFont(new Font("Times New Roman", Font.PLAIN, 33));
         inText.setHorizontalAlignment(inText.RIGHT);
         window.getContentPane().add(inText);
         
@@ -557,7 +558,7 @@ public class Calculator {
         
        // Add factorial button and its functionality
         btnFactorial = new JButton("X!");
-        btnFactorial.setFont(btnFont);
+        btnFactorial.setFont(btnfont);
         btnFactorial.setBounds(x[5], y[5], wBtn, hBtn);
         window.getContentPane().add(btnFactorial);
       btnFactorial.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -618,10 +619,11 @@ public class Calculator {
                     addWrite = false;
            
         });
+       window.getContentPane().add(btnln);
        
     // Inverse button calculates the inverse of a given number
        btnInverse = new JButton("1/x");
-       btnInverse.setFont(btnFont);
+       btnInverse.setFont(btnfont);
        btnInverse.setBounds(x[6], y[3], wBtn, hBtn);
        window.getContentPane().add(btnInverse);
        btnInverse.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -637,8 +639,113 @@ public class Calculator {
      }
      });
        
+    // x^2 button calculates the square of a given number
+       btnSquare = new JButton("x^2");
+       btnSquare.setFont(btnfont);
+       btnSquare.setBounds(x[7], y[1], wBtn, hBtn);
+       window.getContentPane().add(btnSquare);
+       btnSquare.setCursor(new Cursor(Cursor.HAND_CURSOR));
+       btnSquare.addActionListener(new ActionListener() {
+       public void actionPerformed(ActionEvent e) {
+           double val = Double.parseDouble(inText.getText());
+           double square=0;
+          if (e.getSource().equals(btnSquare)) {
+          square=val*val;
+          
+          	if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
+          		inText.setText(String.valueOf((int) square));
+          	} else {
+          		inText.setText(String.valueOf(square));
+          	}
+         } 
+        }});
        
-        window.getContentPane().add(btnln);
+       
+     //Start of arc cos button
+       btnArcCos = new JButton("aCos");
+       btnArcCos.setBounds(x[6],y[5],wBtn,hBtn);
+       btnArcCos.setFont(btnfont);
+       btnArcCos.setCursor(new Cursor(Cursor.HAND_CURSOR));
+       btnArcCos.addActionListener(event -> {
+            repaintFont();
+                if (go) {
+               	 		String displayText = inText.getText();
+               	 		Double value = Double.valueOf(displayText);
+               	 		
+               	 		DecimalFormat format =  new DecimalFormat("##0.00"); 
+               	 	 inText.setText("" + format.format(Math.toDegrees(Math.acos(value))) );
+                    }
+                    go = false;
+                    addWrite = false;
+           
+        });
+        window.getContentPane().add(btnArcCos);
+       
+        btn10powX = new JButton("10^x");
+       btn10powX.setBounds(x[7],y[2],wBtn,hBtn);
+       btn10powX.setFont(btnfont);
+       btn10powX.setCursor(new Cursor(Cursor.HAND_CURSOR));
+       btn10powX.addActionListener(event -> {
+             repaintFont();
+             if (go) {
+     	 		String displayText = inText.getText();
+     	 		Double value = Double.valueOf(displayText);
+     	 		
+     	 		
+     	 		
+     	 		inText.setText("" + Math.pow(10,value));
+          }
+          go = false;
+          addWrite = false;
+ 
+});
+         window.getContentPane().add(btn10powX);
+    //End of button 10^x
+    
+         btnSineInverse = new JButton("aSin");
+         btnSineInverse.setBounds(x[7],y[3],wBtn,hBtn);;
+         btnSineInverse.setFont(btnfont);
+         btnSineInverse.setCursor(new Cursor(Cursor.HAND_CURSOR));
+         btnSineInverse.addActionListener(event -> {
+              repaintFont();
+                  if (go) {
+                           String displayText = inText.getText();
+                          Double value = Double.valueOf(displayText);
+                           DecimalFormat format =  new DecimalFormat("##0.00");
+                           inText.setText("" + format.format(Math.toDegrees(Math.asin(value))) );
+                          
+                      }
+                      go = false;
+                      addWrite = false;
+             
+          });
+          window.getContentPane().add( btnSineInverse);   
+        
+        //Start of arc tan button
+          btnArcTan = new JButton("aTan");
+          btnArcTan.setBounds(x[7],y[4],wBtn,hBtn);
+          btnArcTan.setFont(btnfont);
+          btnArcTan.setCursor(new Cursor(Cursor.HAND_CURSOR));
+          btnArcTan.addActionListener(event -> {
+               repaintFont();
+                   if (go) {
+                  	 		String displayText = inText.getText();
+                  	 		Double value = Double.valueOf(displayText);
+                  	 		
+                  	 		DecimalFormat format =  new DecimalFormat("##0.00"); 
+                  	 		inText.setText("" + format.format(Math.atan(value)));
+                       }
+                       go = false;
+                       addWrite = false;
+              
+           });
+           window.getContentPane().add(btnArcTan);
+     //End of arc tan button
+          
+          
+          
+       
+        
         
         btnExponential = new JButton("^");
         btnExponential.setBounds(x[6],y[2],wBtn,hBtn);
@@ -660,35 +767,10 @@ public class Calculator {
                  }   
          });
          window.getContentPane().add(btnExponential);
-        
-        
-      /*  
-        
-      //Start of Button exponential 
-        btnExponential = new JButton("^");
-        btnExponential.setBounds(x[6],y[2],wBtn,hBtn);
-        btnExponential.setFont(btnfont);
-        btnExponential.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnExponential.addActionListener(event -> {
-             repaintFont();
-             if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                 if (go) {
-                     val = calc(val, inText.getText(), opt);
-                     if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
-                         inText.setText(String.valueOf((int) val));
-                     } else {
-                         inText.setText(String.valueOf(val));
-                     }
-                     opt = '^';
-                     go = false;
-                     addWrite = false;
-                 }   
-         });
-         window.getContentPane().add(btnExponential);*/
-    //End of button exponential
       
         btnBMI = new JButton("BMI");
         btnBMI.setBounds(x[6],y[4],wBtn,hBtn);
+        btnBMI.setFont(btnfont);
         window.getContentPane().add(btnBMI);
         btnBMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -790,6 +872,11 @@ public class Calculator {
              btnInverse.setBackground(null);
              btnExponential.setBackground(null);
              btnln.setBackground(null);
+             btnSquare.setBackground(null);
+             btnArcCos.setBackground(null);
+             btn10powX.setBackground(null);
+             btnSineInverse.setBackground(null);
+             btnArcTan.setBackground(null);
              
              bool = false;
          } else {
@@ -837,6 +924,11 @@ public class Calculator {
              btnInverse.setBackground(Color.ORANGE);
              btnExponential.setBackground(Color.ORANGE);
              btnln.setBackground(Color.ORANGE);
+             btnSquare.setBackground(Color.ORANGE);
+             btnArcCos.setBackground(Color.ORANGE);
+             btn10powX.setBackground(Color.ORANGE);
+             btnSineInverse.setBackground(Color.ORANGE);
+             btnArcTan.setBackground(Color.ORANGE);
              bool = true;
         }
 }
