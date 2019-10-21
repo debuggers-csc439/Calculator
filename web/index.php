@@ -29,12 +29,23 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 		$statement->execute($params);
 		$users = $statement->fetchAll(PDO::FETCH_ASSOC);
 		if(!empty($users)){
+			$flag = 0;
 			foreach($users as $user){
 				if(password_verify($password, $user['password'])){
 					$loggedin = true;
 					$person = $user;
+					$flag = 1;
+					$_SESSION['customerID'] =  $person['customerid'];
 				}
+				if ($flag == 0){
+					$denial = "Incorrect Password!";
+				}
+				
 			}
+		}
+		else{
+			$denial = "Incorrect email address, try using a different email address.";
+		
 		}
 	}
 }
@@ -73,16 +84,22 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 select * from customers
                 This showed everything within the customers table 
         -->		
-				<?php if($loggedin): ?>
+				<?php if(isset($_SESSION['customerID'])): ?>
                 <h2> Hello <?php echo $person['name']; ?>! here's your customized BMI calculator </h2>
-                <?php endif; ?>
 				<h2>BMI Calculator</h2>
 				<p><strong>BMI</strong> Calculator with added Sign up features to record your health status</p>
+				<form action = "logout.php">
+				<input name = "submit" type = "submit" value = "logout">
+				</form>
+		        <?php endif; ?>
 				<!--<ul class="actions">
 					<li><a href="#" class="button special">Get started</a></li>
 				</ul> -->
+				<?php if(!isset($_SESSION['customerID'])): ?>
+				<h2>BMI Calculator</h2>
+				<p><strong>BMI</strong> Calculator with added Sign up features to record your health status</p>
 				<div style = "color: black; width : 40%; margin-left: 30%;">
-				<form method = "post" action = "index.php">
+				<form id = "loginform" method = "post" action = "index.php">
 					<h3>Login</h3>
                 	<Label> Email: </Label>
 					<input type = "email" name = "email">
@@ -90,7 +107,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 					<input type = "password" name = "password"><br>
 					<input name = "submit" type = "submit" value = "login">
 				</form>
+				<?php if($flag == 0): ?>
+				<p style="color: red; font-size: 14px;"> <?php echo $denial; ?>  </p>
+		        <?php endif; ?>
 				</div>
+		        <?php endif; ?>
 			</section>
 				
 			
@@ -161,7 +182,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 						</div>
 						<div class="form-control">
 							<label for="password">Password</label>
-							<input name="password" id="password" rows="4" type = "password" required> </input>
+							<input name="password" id="password" rows="4" type = "password" required>
 						</div>
 						<ul class="actions">
 							<li><input name = "submit" value="signup" type="submit"></li>
