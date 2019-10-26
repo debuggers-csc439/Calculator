@@ -11,6 +11,7 @@ import java.awt.Color;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.lang.Math;
 
 public class Calculator {
 
@@ -19,7 +20,7 @@ public class Calculator {
     private JButton btnC, btnBack, btnMod, btnDiv, btn7, btn8, btn9,
             btnMul, btn4, btn5, btn6, btnSub, btn1, btn2, btn3, btnAdd, btnPoint, btn0, btnEqual,btnSqrt,btnCos,
             btnMC, btnMR, btnMplus,btnMS, colorChoice,btnBMI,btnTan,btnSin, btnFactorial ,btnInverse, btnLog,btnln,
-            btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan;
+            btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh;
     private char opt = ' ';             // Storage Oparator
     private boolean go = true,          // Faire Calcule Avec Opt != (=)
             addWrite = true;    // RacordÈ des Nombres dans l'Affichage
@@ -30,13 +31,13 @@ public class Calculator {
 
     private Calculator() {
         window = new JFrame("Calculator");
-        window.setSize(795,620); // Width and Height Of Window
+        window.setSize(910,620); // Width and Height Of Window
         window.setLocationRelativeTo(null); // Move Window To Center
         
         Font btnFont = new Font("Times New Roman", Font.PLAIN, 18);
         Font btnfont = new Font("Times New Roman", Font.PLAIN, 18);
         colorChoice = new JButton();
-        colorChoice.setBounds(528, 10, 140, 30);
+        colorChoice.setBounds(720, 10, 140, 30);
         colorChoice.setText("Toggle colors");
         colorChoice.setBackground(Color.ORANGE);
         colorChoice.setForeground(Color.BLACK);
@@ -51,11 +52,11 @@ public class Calculator {
         int marginY = 60;
         int j = -1;
         int k = -1;
-        int[] x = {marginX, marginX + 90, 200, 290, marginX+370, marginX+470,marginX + 570 , marginX + 670};
+        int[] x = {marginX, marginX + 90, 200, 290, marginX+370, marginX+470,marginX + 570 , marginX + 670,marginX+770};
         int[] y = {marginY, marginY + 100, marginY + 180, marginY + 260, marginY + 340, marginY + 420, marginY +500, marginY +650};
 
         inText = new JTextField("0");
-        inText.setBounds(x[0],y[0],750,70);
+        inText.setBounds(x[0],y[0],840,70);
         inText.setEditable(false);
         inText.setBackground(Color.WHITE);
         inText.setFont(new Font("Times New Roman", Font.PLAIN, 33));
@@ -622,7 +623,7 @@ public class Calculator {
        window.getContentPane().add(btnln);
        
     // Inverse button calculates the inverse of a given number
-       btnInverse = new JButton("1/x");
+       btnInverse = new JButton("Inv");
        btnInverse.setFont(btnfont);
        btnInverse.setBounds(x[6], y[3], wBtn, hBtn);
        window.getContentPane().add(btnInverse);
@@ -660,7 +661,28 @@ public class Calculator {
          } 
         }});
        
+       // cube root button calculates the cube root of a given number
+       btnCubeRoot = new JButton("Cbr");
+       btnCubeRoot.setFont(btnfont);
+       btnCubeRoot.setBounds(x[7], y[5], wBtn, hBtn);
+       window.getContentPane().add(btnCubeRoot);
+       btnCubeRoot.setCursor(new Cursor(Cursor.HAND_CURSOR));
+       btnCubeRoot.addActionListener(new ActionListener() {
+       public void actionPerformed(ActionEvent e) {
+           double val = Double.parseDouble(inText.getText());
+           double cubeRoot=0;
+          if (e.getSource().equals(btnCubeRoot)) {
+          cubeRoot=Math.cbrt(val);
+          }
+          
+          if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(cubeRoot))) {
+        		inText.setText(String.valueOf((int) cubeRoot));
+        	} else {
+        		inText.setText(String.valueOf(cubeRoot));
+        	}
+       }});  
        
+         
      //Start of arc cos button
        btnArcCos = new JButton("aCos");
        btnArcCos.setBounds(x[6],y[5],wBtn,hBtn);
@@ -767,6 +789,87 @@ public class Calculator {
                  }   
          });
          window.getContentPane().add(btnExponential);
+         
+         //Start of Button X^x 
+         btnXpowX = new JButton("X^x");
+        btnXpowX.setBounds(x[8],y[1],wBtn,hBtn);
+        btnXpowX.setFont(btnfont);
+        btnXpowX.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnXpowX.addActionListener(event -> {
+              repaintFont();
+              if (go) {
+      	 		String displayText = inText.getText();
+      	 		Double value = Double.valueOf(displayText);
+      	 		//Double ln = Math.log(value);
+      	 		
+      	 		//DecimalFormat format =  new DecimalFormat("##0.00"); 
+      	 		inText.setText("" + Math.pow(value,value));
+           }
+           go = false;
+           addWrite = false;
+  
+});
+          window.getContentPane().add(btnXpowX);
+     //End of button X^x
+      
+        //Start of hyperbolic sine function button
+          btnSinH = new JButton("SinH");
+          btnSinH.setBounds(x[8],y[2],wBtn,hBtn);
+          btnSinH.setFont(btnfont);
+          btnSinH.setCursor(new Cursor(Cursor.HAND_CURSOR));
+          btnSinH.addActionListener(event -> {
+               repaintFont();
+                   if (go) {
+                  	 		String displayText = inText.getText();
+                  	 		Double value = Double.valueOf(displayText);
+                  	 		
+                  	 		DecimalFormat format =  new DecimalFormat("##0.00"); 
+                  	 		inText.setText("" + format.format(Math.sinh(value)));
+                       }
+                       go = false;
+                       addWrite = false;
+              
+           });
+           window.getContentPane().add(btnSinH);
+
+         //Start of hyperbolic tan function button
+           btnTanH = new JButton("TanH");
+           btnTanH.setBounds(x[8],y[3],wBtn,hBtn);
+           btnTanH.setFont(btnfont);
+           btnTanH.setCursor(new Cursor(Cursor.HAND_CURSOR));
+           btnTanH.addActionListener(event -> {
+                repaintFont();
+                    if (go) {
+                   	 		String displayText = inText.getText();
+                   	 		Double value = Double.valueOf(displayText);
+                   	 		
+                   	 		DecimalFormat format =  new DecimalFormat("##0.00"); 
+                   	 		inText.setText("" + format.format(Math.tanh(value)));
+                        }
+                        go = false;
+                        addWrite = false;
+               
+            });
+            window.getContentPane().add(btnTanH);
+      //End  of hyperbolic tan function button
+            btnCosh = new JButton("CosH");
+            btnCosh.setBounds(x[8],y[4],wBtn,hBtn);;
+            btnCosh.setFont(btnfont);
+            btnCosh.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            btnCosh.addActionListener(event -> {
+                 repaintFont();
+                     if (go) {
+                              String displayText = inText.getText();
+                             Double value = Double.valueOf(displayText);
+                              DecimalFormat format =  new DecimalFormat("##0.00");
+                              inText.setText("" + format.format(Math.cosh(value)));
+                         }
+                         go = false;
+                         addWrite = false;
+
+             });
+
+             window.getContentPane().add(  btnCosh);   
       
         btnBMI = new JButton("BMI");
         btnBMI.setBounds(x[6],y[4],wBtn,hBtn);
@@ -774,7 +877,7 @@ public class Calculator {
         window.getContentPane().add(btnBMI);
         btnBMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                open("http://www.debugersbmi.com"); // just what is the 'open' method?
+                open("http://www.debugersbmi.com"); 
             }
 
             private void open(String string) {
@@ -877,6 +980,11 @@ public class Calculator {
              btn10powX.setBackground(null);
              btnSineInverse.setBackground(null);
              btnArcTan.setBackground(null);
+             btnCubeRoot.setBackground(null);
+             btnXpowX.setBackground(null);
+             btnCosh.setBackground(null);
+             btnTanH.setBackground(null);
+             btnSinH.setBackground(null);
              
              bool = false;
          } else {
@@ -929,6 +1037,11 @@ public class Calculator {
              btn10powX.setBackground(Color.ORANGE);
              btnSineInverse.setBackground(Color.ORANGE);
              btnArcTan.setBackground(Color.ORANGE);
+             btnCubeRoot.setBackground(Color.ORANGE);
+             btnXpowX.setBackground(Color.ORANGE);
+             btnCosh.setBackground(Color.ORANGE);
+             btnTanH.setBackground(Color.ORANGE);
+             btnSinH.setBackground(Color.ORANGE);
              bool = true;
         }
 }
