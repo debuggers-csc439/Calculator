@@ -26,7 +26,7 @@ public class Calculator {
             addWrite = true;    // RacordÈ des Nombres dans l'Affichage
     private double val = 0; // Storage Values For Calcule
     private boolean bool = false;
-  
+    static String ans = null;
   
 
     private Calculator() {
@@ -54,6 +54,7 @@ public class Calculator {
         int k = -1;
         int[] x = {marginX, marginX + 90, 200, 290, marginX+370, marginX+470,marginX + 570 , marginX + 670,marginX+770};
         int[] y = {marginY, marginY + 100, marginY + 180, marginY + 260, marginY + 340, marginY + 420, marginY +500, marginY +650};
+        
 
         inText = new JTextField("0");
         inText.setBounds(x[0],y[0],840,70);
@@ -104,6 +105,7 @@ public class Calculator {
                String displayText = inText.getText();
                Double value = Double.valueOf(displayText);
                inText.setText(""+Math.sqrt(value));
+               ans = ""+Math.sqrt(value);
            }
            go = false;
            addWrite = false;
@@ -126,6 +128,7 @@ public class Calculator {
                             
                             DecimalFormat format =  new DecimalFormat("##0.00"); 
                             inText.setText("" + format.format(Math.cos(radians)));
+                            ans = format.format(Math.cos(radians));
                      }
                      go = false;
                      addWrite = false;
@@ -149,6 +152,7 @@ public class Calculator {
                             
                             DecimalFormat format =  new DecimalFormat("##0.00"); 
                             inText.setText("" + format.format(Math.tan(radians)));
+                            ans = "" + format.format(Math.tan(radians));
                       }
                       go = false;
                       addWrite = false;
@@ -172,6 +176,7 @@ public class Calculator {
                             
                             DecimalFormat format =  new DecimalFormat("##0.00"); 
                             inText.setText("" + format.format(Math.sin(radians)));
+                            ans = "" + format.format(Math.sin(radians));
                        }
                        go = false;
                        addWrite = false;
@@ -196,8 +201,10 @@ public class Calculator {
                     //end
                     if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
                         inText.setText(String.valueOf((int) val));
+                        ans = String.valueOf((int) val);
                     } else {
                         inText.setText(String.valueOf(val));
+                        ans = String.valueOf(val);
                     }
                     opt = '%';
                     go = false;
@@ -217,8 +224,10 @@ public class Calculator {
                     val = calc(val, inText.getText(), opt);
                     if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
                         inText.setText(String.valueOf((int) val));
+                        ans = String.valueOf((int) val);
                     } else {
                         inText.setText(String.valueOf(val));
+                        ans = String.valueOf(val);
                     }
                     opt = '/';
                     go = false;
@@ -300,8 +309,10 @@ public class Calculator {
                     val = calc(val, inText.getText(), opt);
                     if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
                         inText.setText(String.valueOf((int) val));
+                        ans = String.valueOf((int) val);
                     } else {
                         inText.setText(String.valueOf(val));
+                        ans = String.valueOf(val);
                     }
                     opt = '*';
                     go = false;
@@ -383,8 +394,10 @@ public class Calculator {
                     val = calc(val, inText.getText(), opt);
                     if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
                         inText.setText(String.valueOf((int) val));
+                        ans = String.valueOf((int) val);
                     } else {
                         inText.setText(String.valueOf(val));
+                        ans = String.valueOf(val);
                     }
 
                     opt = '-';
@@ -467,8 +480,10 @@ public class Calculator {
                     val = calc(val, inText.getText(), opt);
                     if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
                         inText.setText(String.valueOf((int) val));
+                        ans = String.valueOf((int) val);
                     } else {
                         inText.setText(String.valueOf(val));
+                        ans = String.valueOf(val);
                     }
                     opt = '+';
                     go = false;
@@ -525,8 +540,10 @@ public class Calculator {
                     val = calc(val, inText.getText(), opt);
                     if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
                         inText.setText(String.valueOf((int) val));
+                        ans = String.valueOf((int) val);
                     } else {
                         inText.setText(String.valueOf(val));
+                        ans = String.valueOf(val);
                     }
                     opt = '=';
                     addWrite = false;
@@ -575,6 +592,7 @@ public class Calculator {
               }
 
              inText.setText(String.valueOf("The Factorial of  " + n + " " + "is :" + f));
+             ans = String.valueOf("The Factorial of  " + n + " " + "is :" + f);
           }
 
       }
@@ -591,8 +609,8 @@ public class Calculator {
                if (go) {
               	 		String displayText = inText.getText();
               	 		Double value = Double.valueOf(displayText);
-              	 		 
               	 		inText.setText("" + (Math.log10(value)));
+              	 		ans = "" + (Math.log10(value));
                    }
                    go = false;
                    addWrite = false;
@@ -615,6 +633,7 @@ public class Calculator {
                	 		
                	 		//DecimalFormat format =  new DecimalFormat("##0.00"); 
                	 		inText.setText("" + Math.log(value));
+               	 		ans = "" + Math.log(value);
                     }
                     go = false;
                     addWrite = false;
@@ -635,6 +654,7 @@ public class Calculator {
           if (e.getSource().equals(btnInverse)) {
           inverse=1.0/val;
             inText.setText(String.valueOf(inverse));
+            ans = String.valueOf(inverse);
          }
 
      }
@@ -655,8 +675,10 @@ public class Calculator {
           
           	if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
           		inText.setText(String.valueOf((int) square));
+          		ans = String.valueOf((int) square);
           	} else {
           		inText.setText(String.valueOf(square));
+          		ans = String.valueOf(square);
           	}
          } 
         }});
@@ -677,8 +699,10 @@ public class Calculator {
           
           if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(cubeRoot))) {
         		inText.setText(String.valueOf((int) cubeRoot));
+        		ans = String.valueOf((int) cubeRoot);
         	} else {
         		inText.setText(String.valueOf(cubeRoot));
+        		ans = String.valueOf(cubeRoot);
         	}
        }});  
        
@@ -696,6 +720,7 @@ public class Calculator {
                	 		
                	 		DecimalFormat format =  new DecimalFormat("##0.00"); 
                	 	 inText.setText("" + format.format(Math.toDegrees(Math.acos(value))) );
+               	 	 ans = "" + format.format(Math.toDegrees(Math.acos(value)));
                     }
                     go = false;
                     addWrite = false;
@@ -712,10 +737,8 @@ public class Calculator {
              if (go) {
      	 		String displayText = inText.getText();
      	 		Double value = Double.valueOf(displayText);
-     	 		
-     	 		
-     	 		
      	 		inText.setText("" + Math.pow(10,value));
+     	 		ans = "" + Math.pow(10,value);
           }
           go = false;
           addWrite = false;
@@ -735,6 +758,7 @@ public class Calculator {
                           Double value = Double.valueOf(displayText);
                            DecimalFormat format =  new DecimalFormat("##0.00");
                            inText.setText("" + format.format(Math.toDegrees(Math.asin(value))) );
+                           ans = "" + format.format(Math.toDegrees(Math.asin(value)));
                           
                       }
                       go = false;
@@ -756,6 +780,7 @@ public class Calculator {
                   	 		
                   	 		DecimalFormat format =  new DecimalFormat("##0.00"); 
                   	 		inText.setText("" + format.format(Math.atan(value)));
+                  	 		ans = "" + format.format(Math.atan(value));
                        }
                        go = false;
                        addWrite = false;
@@ -780,8 +805,10 @@ public class Calculator {
                      val = calc(val, inText.getText(), opt);
                      if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
                          inText.setText(String.valueOf((int) val));
+                         ans = String.valueOf((int) val);
                      } else {
                          inText.setText(String.valueOf(val));
+                         ans = String.valueOf(val);
                      }
                      opt = '^';
                      go = false;
@@ -804,6 +831,8 @@ public class Calculator {
       	 		
       	 		//DecimalFormat format =  new DecimalFormat("##0.00"); 
       	 		inText.setText("" + Math.pow(value,value));
+      	 		ans = "" + Math.pow(value,value);
+      	 		
            }
            go = false;
            addWrite = false;
@@ -825,6 +854,7 @@ public class Calculator {
                   	 		
                   	 		DecimalFormat format =  new DecimalFormat("##0.00"); 
                   	 		inText.setText("" + format.format(Math.sinh(value)));
+                  	 		ans = format.format(Math.sinh(value));
                        }
                        go = false;
                        addWrite = false;
@@ -845,6 +875,7 @@ public class Calculator {
                    	 		
                    	 		DecimalFormat format =  new DecimalFormat("##0.00"); 
                    	 		inText.setText("" + format.format(Math.tanh(value)));
+                   	 		ans = format.format(Math.tanh(value));
                         }
                         go = false;
                         addWrite = false;
@@ -852,6 +883,25 @@ public class Calculator {
             });
             window.getContentPane().add(btnTanH);
       //End  of hyperbolic tan function button
+      
+      //Start of ans button
+            JButton btnans = new JButton("ans");
+            btnans.setBounds(x[8],y[5],wBtn,hBtn);
+            btnans.setFont(btnfont);
+            btnTanH.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            btnans.addActionListener(event -> {
+                 repaintFont();
+                     if (go) {
+                    	      if(ans != null)
+                    	    	  inText.setText(ans);
+                         }
+                         go = false;
+                         addWrite = false;
+                
+             });
+            window.getContentPane().add(btnans);
+            //End of ans Buttton
+           
             btnCosh = new JButton("CosH");
             btnCosh.setBounds(x[8],y[4],wBtn,hBtn);;
             btnCosh.setFont(btnfont);
@@ -863,6 +913,7 @@ public class Calculator {
                              Double value = Double.valueOf(displayText);
                               DecimalFormat format =  new DecimalFormat("##0.00");
                               inText.setText("" + format.format(Math.cosh(value)));
+                              ans = format.format(Math.cosh(value));
                          }
                          go = false;
                          addWrite = false;
