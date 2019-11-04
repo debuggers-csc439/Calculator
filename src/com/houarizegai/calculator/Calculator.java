@@ -1,4 +1,4 @@
-import java.awt.Cursor;
+﻿import java.awt.Cursor;
 import java.awt.Desktop;
 import java.math.*;
 import java.net.URL;
@@ -23,7 +23,7 @@ public class Calculator {
             btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh;
     private char opt = ' ';             // Storage Oparator
     private boolean go = true,          // Faire Calcule Avec Opt != (=)
-            addWrite = true;    // RacordÈ des Nombres dans l'Affichage
+            addWrite = true;    // RacordÃˆ des Nombres dans l'Affichage
     private double val = 0; // Storage Values For Calcule
     private boolean bool = false;
     static String ans = null;
@@ -31,7 +31,7 @@ public class Calculator {
 
     private Calculator() {
         window = new JFrame("Calculator");
-        window.setSize(910,620); // Width and Height Of Window
+        window.setSize(1000,620); // Width and Height Of Window
         window.setLocationRelativeTo(null); // Move Window To Center
         
         Font btnFont = new Font("Times New Roman", Font.PLAIN, 18);
@@ -52,12 +52,12 @@ public class Calculator {
         int marginY = 60;
         int j = -1;
         int k = -1;
-        int[] x = {marginX, marginX + 90, 200, 290, marginX+370, marginX+470,marginX + 570 , marginX + 670,marginX+770};
+        int[] x = {marginX, marginX + 90, 200, 290, marginX+370, marginX+470,marginX + 570 , marginX + 670,marginX+770, marginX + 870, marginX +970};
         int[] y = {marginY, marginY + 100, marginY + 180, marginY + 260, marginY + 340, marginY + 420, marginY +500, marginY +650};
         
 
         inText = new JTextField("0");
-        inText.setBounds(x[0],y[0],840,70);
+        inText.setBounds(x[0],y[0],940,70);
         inText.setEditable(false);
         inText.setBackground(Color.WHITE);
         inText.setFont(new Font("Times New Roman", Font.PLAIN, 33));
@@ -888,7 +888,7 @@ public class Calculator {
             JButton btnans = new JButton("ans");
             btnans.setBounds(x[8],y[5],wBtn,hBtn);
             btnans.setFont(btnfont);
-            btnTanH.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            btnans.setCursor(new Cursor(Cursor.HAND_CURSOR));
             btnans.addActionListener(event -> {
                  repaintFont();
                      if (go) {
@@ -901,6 +901,24 @@ public class Calculator {
              });
             window.getContentPane().add(btnans);
             //End of ans Buttton
+            
+            //Start of Comma button
+            JButton btnComma = new JButton(",");
+            btnComma.setBounds(x[9],y[5],wBtn,hBtn);
+            btnComma.setFont(btnfont);
+            btnComma.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            btnComma.addActionListener(event -> {
+                 repaintFont();
+                     if (go) {
+                    	      String displayText = inText.getText();
+                    	      inText.setText(displayText + ",");
+                         }
+                         go = false;
+                         addWrite = false;
+                
+             });
+            window.getContentPane().add(btnComma);
+            //End of comma button
            
             btnCosh = new JButton("CosH");
             btnCosh.setBounds(x[8],y[4],wBtn,hBtn);;
@@ -1101,3 +1119,4 @@ public class Calculator {
         new Calculator();
     }
 }
+                  	 	
