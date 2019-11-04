@@ -20,7 +20,7 @@ public class Calculator {
     private JButton btnC, btnBack, btnMod, btnDiv, btn7, btn8, btn9,
             btnMul, btn4, btn5, btn6, btnSub, btn1, btn2, btn3, btnAdd, btnPoint, btn0, btnEqual,btnSqrt,btnCos,
             btnMC, btnMR, btnMplus,btnMS, colorChoice,btnBMI,btnTan,btnSin, btnFactorial ,btnInverse, btnLog,btnln,
-            btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh;
+            btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh, btnnPr;
     private char opt = ' ';             // Storage Oparator
     private boolean go = true,          // Faire Calcule Avec Opt != (=)
             addWrite = true;    // RacordÃˆ des Nombres dans l'Affichage
@@ -55,7 +55,29 @@ public class Calculator {
         int[] x = {marginX, marginX + 90, 200, 290, marginX+370, marginX+470,marginX + 570 , marginX + 670,marginX+770, marginX + 870, marginX +970};
         int[] y = {marginY, marginY + 100, marginY + 180, marginY + 260, marginY + 340, marginY + 420, marginY +500, marginY +650};
         
-
+        //start of button nPr
+        btnnPr = new JButton("nPr");
+        btnnPr.setBounds(x[8],y[3],wBtn,hBtn);
+        btnnPr.setFont(btnfont);
+        btnnPr.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnnPr.addActionListener(event -> {
+             repaintFont();
+             if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
+                 if (go) {
+                     val = calc(val, inText.getText(), opt);
+                     if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
+                         inText.setText(String.valueOf((int) val));
+                     } else {
+                         inText.setText(String.valueOf(val));
+                     }
+                     opt = 'P';
+                     go = false;
+                     addWrite = false;
+                 }   
+         });
+         window.getContentPane().add(btnnPr);
+        //end of button nPr
+        
         inText = new JTextField("0");
         inText.setBounds(x[0],y[0],940,70);
         inText.setEditable(false);
@@ -981,9 +1003,25 @@ public class Calculator {
         else if(opt == '^'){
         	return Math.pow(x,y);
         }
+         else if(opt == 'P') {	
+        	return nPr(x,y);
+        }
         inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
         return y;
     }
+    
+        static double factorial(double n) {
+    	
+    	if (n <= 1) {
+    		return 1;
+    	}
+    	return n * factorial(n-1);
+    }
+      
+    static double nPr(double n, double r) 
+    { 
+        return factorial(n) / factorial(n - r); 
+    } 
 
     private void repaintFont() {
         inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
