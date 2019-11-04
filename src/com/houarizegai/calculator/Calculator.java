@@ -20,7 +20,7 @@ public class Calculator {
     private JButton btnC, btnBack, btnMod, btnDiv, btn7, btn8, btn9,
             btnMul, btn4, btn5, btn6, btnSub, btn1, btn2, btn3, btnAdd, btnPoint, btn0, btnEqual,btnSqrt,btnCos,
             btnMC, btnMR, btnMplus,btnMS, colorChoice,btnBMI,btnTan,btnSin, btnFactorial ,btnInverse, btnLog,btnln,
-            btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh;
+            btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh,btnAbs;
     private char opt = ' ';             // Storage Oparator
     private boolean go = true,          // Faire Calcule Avec Opt != (=)
             addWrite = true;    // RacordÃˆ des Nombres dans l'Affichage
@@ -919,6 +919,27 @@ public class Calculator {
              });
             window.getContentPane().add(btnComma);
             //End of comma button
+        
+          //Start of Abs button
+            JButton btnAbs = new JButton("Abs");
+            btnAbs.setBounds(x[9],y[4],wBtn,hBtn);
+            btnAbs.setFont(btnfont);
+            btnAbs.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            btnAbs.addActionListener(event -> {
+                 repaintFont();
+                 if (go) {
+         	 		String displayText = inText.getText();
+         	 		Double value = Double.valueOf(displayText);
+         	 		DecimalFormat format =  new 		DecimalFormat("##0.00"); 
+         	 		inText.setText("" + format.format(Math.abs(value)));
+         	 		ans = format.format(Math.abs(value));
+              }
+              go = false;
+              addWrite = false;
+        
+     });
+            window.getContentPane().add(btnAbs);
+            //End of Abs button
            
             btnCosh = new JButton("CosH");
             btnCosh.setBounds(x[8],y[4],wBtn,hBtn);;
