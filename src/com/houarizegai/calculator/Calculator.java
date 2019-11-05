@@ -20,7 +20,7 @@ public class Calculator {
     private JButton btnC, btnBack, btnMod, btnDiv, btn7, btn8, btn9,
             btnMul, btn4, btn5, btn6, btnSub, btn1, btn2, btn3, btnAdd, btnPoint, btn0, btnEqual,btnSqrt,btnCos,
             btnMC, btnMR, btnMplus,btnMS, colorChoice,btnBMI,btnTan,btnSin, btnFactorial ,btnInverse, btnLog,btnln,
-            btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh;
+            btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh,btnMin;
     private char opt = ' ';             // Storage Oparator
     private boolean go = true,          // Faire Calcule Avec Opt != (=)
             addWrite = true;    // RacordÃˆ des Nombres dans l'Affichage
@@ -945,6 +945,27 @@ public class Calculator {
              });
 
              window.getContentPane().add(  btnCosh);   
+              btnMin = new JButton("Min");
+            btnMin.setBounds(x[9],y[4],wBtn,hBtn);
+            btnMin.setFont(btnfont);
+            btnMin.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            btnMin.addActionListener(event -> {
+                 repaintFont();
+                 if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
+                     if (go) {
+                         val = calc(val, inText.getText(), opt);
+                         if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
+                             inText.setText(String.valueOf((int) val));
+                         } else {
+                             inText.setText(String.valueOf(val));
+                         }
+                         opt = 'M';
+                         go = false;
+                         addWrite = false;
+                     }   
+             });
+             window.getContentPane().add(btnMin);
+           
       
         btnBMI = new JButton("BMI");
         btnBMI.setBounds(x[6],y[4],wBtn,hBtn);
