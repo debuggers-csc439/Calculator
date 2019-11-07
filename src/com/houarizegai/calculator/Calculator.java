@@ -20,8 +20,8 @@ public class Calculator {
     private JButton btnC, btnBack, btnMod, btnDiv, btn7, btn8, btn9,
             btnMul, btn4, btn5, btn6, btnSub, btn1, btn2, btn3, btnAdd, btnPoint, btn0, btnEqual,btnSqrt,btnCos,
             btnMC, btnMR, btnMplus,btnMS, colorChoice,btnBMI,btnTan,btnSin, btnFactorial ,btnInverse, btnLog,btnln,
-            btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh,
-            btnnPr,btnnCr,btnans,btnMax,btnMin,btnComma,btnAbs;
+            btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh,btnBinarytoDecimal,btnNthRoot,
+            btnEpowX,btnDecimalToBinary,btnnPr,btnnCr,btnans,btnMax,btnMin,btnComma,btnAbs;
     private char opt = ' ';             // Storage Oparator
     private boolean go = true,          // Faire Calcule Avec Opt != (=)
             addWrite = true;    // RacordÈ des Nombres dans l'Affichage
@@ -1047,8 +1047,109 @@ public class Calculator {
                window.getContentPane().add(btnAbs);
                //End of Abs button
 
-                 
+               //Start of Button ->Dec 
+               btnBinarytoDecimal = new JButton("->Dec");
+               btnBinarytoDecimal.setBounds(x[10],y[2],wBtn,hBtn);
+               btnBinarytoDecimal.setFont(btnfont);
+               btnBinarytoDecimal.setCursor(new Cursor(Cursor.HAND_CURSOR));
+               btnBinarytoDecimal.addActionListener(event -> {
+                    repaintFont();
+                    if (go) {
+            	 		String displayText = inText.getText();
+            	 		for (int i =0; i<displayText.length();i++) {
+            	 				}
+            	 		int value = Integer.parseInt(displayText,2);
+            	 		inText.setText("" + value);
+                 }
+                 go = false;
+                 addWrite = false;
+        
+     });
+                window.getContentPane().add( btnBinarytoDecimal);
+           //End 
+
+                //Start of nth root
+                btnNthRoot = new JButton("x\u221A");
+                btnNthRoot.setBounds(x[10],y[3],wBtn,hBtn);
+                btnNthRoot.setFont(btnfont);
+                btnNthRoot.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                btnNthRoot.addActionListener(event -> {
+                      repaintFont();
+                      if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
+                          if (go) {
+                              val = calc(val, inText.getText(), opt);
+                              if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
+                                  inText.setText(String.valueOf((int) val));
+                              } else {
+                                  inText.setText(String.valueOf(val));
+                              }
+                              opt = '\u221A';
+                              go = false;
+                              addWrite = false;
+                          }   
+         });
+                  window.getContentPane().add(btnNthRoot);
+             //End of button nth root 
+                  //Start of button e^x
+                  btnEpowX = new JButton("e^x");
+                  btnEpowX.setBounds(x[10],y[4],wBtn,hBtn);
+                  btnEpowX.setFont(btnfont);
+                  btnEpowX.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                  btnEpowX.addActionListener(event -> {
+                        repaintFont();
+                        if (go) {
+                	 		String displayText = inText.getText();
+                	 		Double value = Double.valueOf(displayText);
+                	 		
+                	 		
+                	 		
+                	 		inText.setText("" + Math.pow(Math.E,value));
+                     }
+                     go = false;
+                     addWrite = false;
+            
+           });
+                    window.getContentPane().add(btnEpowX);
+               //End of button e^x
+                    
+                    
+
+                    // begin of decimal to binary
+
+                
+                    btnDecimalToBinary = new JButton("->Bin");
+
+                    btnDecimalToBinary.setBounds(x[10],y[5],wBtn,hBtn);
+
+                    btnDecimalToBinary.setFont(btnfont);
+
+                    btnDecimalToBinary.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+                    btnDecimalToBinary.addActionListener(event -> {
+
+                         repaintFont();
+
+                             if (go) {
+
+                                      String displayText = inText.getText();
+
+                                      int value= Integer.valueOf(displayText);
+
+                                      inText.setText( Integer.toBinaryString(value));
              
+                                 }
+
+                                 go = false;
+
+                                 addWrite = false;
+
+                     });
+
+                     window.getContentPane().add(btnDecimalToBinary);   
+
+
+                // end of decimal to binary
+                    
         btnBMI = new JButton("BMI");
         btnBMI.setBounds(x[6],y[4],wBtn,hBtn);
         btnBMI.setFont(btnfont);
@@ -1219,6 +1320,10 @@ public class Calculator {
              btnMax.setBackground(null);
              btnComma.setBackground(null);
              btnAbs.setBackground(null);
+             btnBinarytoDecimal.setBackground(null);
+             btnNthRoot.setBackground(null);
+             btnEpowX.setBackground(null);
+             btnDecimalToBinary.setBackground(null);
              
              bool = false;
          } else {
@@ -1283,6 +1388,10 @@ public class Calculator {
              btnMax.setBackground(Color.ORANGE);
              btnComma.setBackground(Color.ORANGE);
              btnAbs.setBackground(Color.ORANGE);
+             btnBinarytoDecimal.setBackground(Color.ORANGE);
+             btnNthRoot.setBackground(Color.ORANGE);
+             btnEpowX.setBackground(Color.ORANGE);
+             btnDecimalToBinary.setBackground(Color.ORANGE);
              bool = true;
         }
 }
