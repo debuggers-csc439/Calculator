@@ -39,9 +39,6 @@ public class Calculator {
         window = new JFrame("Calculator");
 
         window.setSize(1200,620); // Width and Height Of Window
-
-        window.setSize(1100,620); // Width and Height Of Window
-
         window.setLocationRelativeTo(null); // Move Window To Center
         
         Font btnFont = new Font("Times New Roman", Font.PLAIN, 18);
@@ -64,8 +61,6 @@ public class Calculator {
         int k = -1;
 
         int[] x = {marginX, marginX + 90, 200, 290, marginX+370, marginX+470,marginX + 570 , marginX + 670,marginX+770,marginX+870, marginX+970, marginX + 1070};
-
-        int[] x = {marginX, marginX + 90, 200, 290, marginX+370, marginX+470,marginX + 570 , marginX + 670,marginX+770,marginX+870, marginX+970};
 
         int[] y = {marginY, marginY + 100, marginY + 180, marginY + 260, marginY + 340, marginY + 420, marginY +500, marginY +650};
         
