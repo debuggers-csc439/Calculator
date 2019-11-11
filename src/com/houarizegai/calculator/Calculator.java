@@ -21,7 +21,11 @@ public class Calculator {
             btnMul, btn4, btn5, btn6, btnSub, btn1, btn2, btn3, btnAdd, btnPoint, btn0, btnEqual,btnSqrt,btnCos,
             btnMC, btnMR, btnMplus,btnMS, colorChoice,btnBMI,btnTan,btnSin, btnFactorial ,btnInverse, btnLog,btnln,
             btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh,btnBinarytoDecimal,btnNthRoot,
-            btnEpowX,btnDecimalToBinary,btnnPr,btnnCr,btnans,btnMax,btnMin,btnComma,btnAbs;
+
+            btnEpowX,btnDecimalToBinary,btnnPr,btnnCr,btnans,btnMax,btnMin,btnComma,btnAbs,btnSec;
+
+            
+
     private char opt = ' ';             // Storage Oparator
     private boolean go = true,          // Faire Calcule Avec Opt != (=)
             addWrite = true;    // RacordÈ des Nombres dans l'Affichage
@@ -33,7 +37,11 @@ public class Calculator {
 
     private Calculator() {
         window = new JFrame("Calculator");
+
+        window.setSize(1200,620); // Width and Height Of Window
+
         window.setSize(1100,620); // Width and Height Of Window
+
         window.setLocationRelativeTo(null); // Move Window To Center
         
         Font btnFont = new Font("Times New Roman", Font.PLAIN, 18);
@@ -54,12 +62,20 @@ public class Calculator {
         int marginY = 60;
         int j = -1;
         int k = -1;
+
+        int[] x = {marginX, marginX + 90, 200, 290, marginX+370, marginX+470,marginX + 570 , marginX + 670,marginX+770,marginX+870, marginX+970, marginX + 1070};
+
         int[] x = {marginX, marginX + 90, 200, 290, marginX+370, marginX+470,marginX + 570 , marginX + 670,marginX+770,marginX+870, marginX+970};
+
         int[] y = {marginY, marginY + 100, marginY + 180, marginY + 260, marginY + 340, marginY + 420, marginY +500, marginY +650};
         
 
         inText = new JTextField("0");
+
+        inText.setBounds(x[0],y[0],1150,70);
+
         inText.setBounds(x[0],y[0],1050,70);
+
         inText.setEditable(false);
         inText.setBackground(Color.WHITE);
         inText.setFont(new Font("Times New Roman", Font.PLAIN, 33));
@@ -942,6 +958,32 @@ public class Calculator {
               });
               window.getContentPane().add(btnnCr);
              //end of button nCr 
+              
+              
+              btnSec = new JButton("Sec");
+              btnSec.setBounds(x[11],y[2],wBtn,hBtn);
+              btnSec.setFont(btnfont);
+              btnSec.setCursor(new Cursor(Cursor.HAND_CURSOR));
+              btnSec.addActionListener(event -> {
+                    repaintFont();
+
+                    if (go) {
+                              String displayText = inText.getText();
+                              Double value = Double.valueOf(displayText);
+                              Double radians = Math.toRadians(value);
+                              
+                              DecimalFormat format =  new DecimalFormat("##0.00"); 
+                              inText.setText("" + format.format(1.0/Math.cos(radians)));
+                              ans = "" + format.format(1.0/Math.cos(radians));
+                        }
+                        go = false;
+                        addWrite = false;
+
+        
+       });
+              window.getContentPane().add(btnSec);
+
+  
 
             //start of button nPr
             btnnPr = new JButton("nPr");
@@ -1324,6 +1366,9 @@ public class Calculator {
              btnNthRoot.setBackground(null);
              btnEpowX.setBackground(null);
              btnDecimalToBinary.setBackground(null);
+
+             btnSec.setBackground(null);
+
              
              bool = false;
          } else {
@@ -1392,6 +1437,9 @@ public class Calculator {
              btnNthRoot.setBackground(Color.ORANGE);
              btnEpowX.setBackground(Color.ORANGE);
              btnDecimalToBinary.setBackground(Color.ORANGE);
+
+             btnSec.setBackground(Color.ORANGE);
+
              bool = true;
         }
 }
