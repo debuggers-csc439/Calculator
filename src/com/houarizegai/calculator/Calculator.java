@@ -20,11 +20,14 @@ public class Calculator {
     private JButton btnC, btnBack, btnMod, btnDiv, btn7, btn8, btn9,
             btnMul, btn4, btn5, btn6, btnSub, btn1, btn2, btn3, btnAdd, btnPoint, btn0, btnEqual,btnSqrt,btnCos,
             btnMC, btnMR, btnMplus,btnMS, colorChoice,btnBMI,btnTan,btnSin, btnFactorial ,btnInverse, btnLog,btnln,
+
             btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh,
             btnBinarytoDecimal,btnNthRoot,btnEpowX,btnDecimalToBinary,btnnPr,btnnCr,btnans,btnMax,btnMin,btnComma,btnAbs
             ,btnCot;
 
-            
+
+           
+
 
     private char opt = ' ';             // Storage Oparator
     private boolean go = true,          // Faire Calcule Avec Opt != (=)
@@ -39,7 +42,6 @@ public class Calculator {
         window = new JFrame("Calculator");
 
         window.setSize(1200,620); // Width and Height Of Window
-
 
         window.setLocationRelativeTo(null); // Move Window To Center
         
@@ -63,6 +65,7 @@ public class Calculator {
         int k = -1;
 
         int[] x = {marginX, marginX + 90, 200, 290, marginX+370, marginX+470,marginX + 570 , marginX + 670,marginX+770,marginX+870, marginX+970, marginX + 1070};
+
         int[] y = {marginY, marginY + 100, marginY + 180, marginY + 260, marginY + 340, marginY + 420, marginY +500, marginY +650};
         
 
@@ -981,6 +984,29 @@ public class Calculator {
 
   
 
+              btnCsc = new JButton("Csc");
+              btnCsc.setBounds(x[11],y[3],wBtn,hBtn);
+              btnCsc.setFont(btnfont);
+              btnCsc.setCursor(new Cursor(Cursor.HAND_CURSOR));
+              btnCsc.addActionListener(event -> {
+                    repaintFont();
+
+                    if (go) {
+                              String displayText = inText.getText();
+                              Double value = Double.valueOf(displayText);
+                              Double radians = Math.toRadians(value);
+                              
+                              DecimalFormat format =  new DecimalFormat("##0.00"); 
+                              inText.setText("" + format.format(1.0/Math.sin(radians)));
+                              ans = "" + format.format(1.0/Math.sin(radians));
+                        }
+                        go = false;
+                        addWrite = false;
+
+        
+       });
+              window.getContentPane().add(btnCsc);
+
             //start of button nPr
             btnnPr = new JButton("nPr");
             btnnPr.setBounds(x[9],y[3],wBtn,hBtn);
@@ -1362,7 +1388,12 @@ public class Calculator {
              btnNthRoot.setBackground(null);
              btnEpowX.setBackground(null);
              btnDecimalToBinary.setBackground(null);
+
              btnCot.setBackground(null);
+
+
+             btnCsc.setBackground(null);
+
 
              
              bool = false;
@@ -1433,7 +1464,11 @@ public class Calculator {
              btnEpowX.setBackground(Color.ORANGE);
              btnDecimalToBinary.setBackground(Color.ORANGE);
 
+
              btnCot.setBackground(Color.ORANGE);
+
+             btnCsc.setBackground(Color.ORANGE);
+
 
              bool = true;
         }
