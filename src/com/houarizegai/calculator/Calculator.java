@@ -20,12 +20,8 @@ public class Calculator {
     private JButton btnC, btnBack, btnMod, btnDiv, btn7, btn8, btn9,
             btnMul, btn4, btn5, btn6, btnSub, btn1, btn2, btn3, btnAdd, btnPoint, btn0, btnEqual,btnSqrt,btnCos,
             btnMC, btnMR, btnMplus,btnMS, colorChoice,btnBMI,btnTan,btnSin, btnFactorial ,btnInverse, btnLog,btnln,
-
-            btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh,btnMin;
-
             btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh,btnBinarytoDecimal,btnNthRoot,
             btnEpowX,btnDecimalToBinary,btnnPr,btnnCr,btnans,btnMax,btnMin,btnComma,btnAbs;
-
     private char opt = ' ';             // Storage Oparator
     private boolean go = true,          // Faire Calcule Avec Opt != (=)
             addWrite = true;    // RacordÈ des Nombres dans l'Affichage
@@ -70,494 +66,32 @@ public class Calculator {
         inText.setHorizontalAlignment(inText.RIGHT);
         window.getContentPane().add(inText);
         
-        btnC = new JButton("C");
-        btnC.setBounds(x[0],y[1],wBtn,hBtn);
-        btnC.setFont(btnFont);
-        btnC.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnC.addActionListener(event -> {
-            repaintFont();
-            inText.setText("0");
-            opt = ' ';
-            val = 0;
-        });
-        window.getContentPane().add(btnC);
-                
-        btnBack = new JButton("<-");
-        btnBack.setBounds(x[1],y[1],wBtn,hBtn);
-        btnBack.setFont(btnFont);
-        btnBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnBack.addActionListener(event -> {
-            repaintFont();
-            String str = inText.getText();
-            StringBuilder str2 = new StringBuilder();
-            for (i = 0; i < (str.length() - 1); i++) {
-                str2.append(str.charAt(i));
-            }
-            if (str2.toString().equals("")) {
-                inText.setText("0");
-            } else {
-                inText.setText(str2.toString());
-            }
-        });
-        window.getContentPane().add(btnBack);
         
-        btnSqrt = new JButton("sqrt");
-       btnSqrt.setBounds(x[4],y[1],wBtn,hBtn);
-       btnSqrt.setFont(btnfont);
-       btnSqrt.setCursor(new Cursor(Cursor.HAND_CURSOR));
-     btnSqrt.addActionListener(event -> {
-            repaintFont();
-           if(go) {
-               String displayText = inText.getText();
-               Double value = Double.valueOf(displayText);
-               inText.setText(""+Math.sqrt(value));
-               ans = ""+Math.sqrt(value);
-           }
-           go = false;
-           addWrite = false;
-        });
-        window.getContentPane().add(btnSqrt);
-        
-        
-        
-        //start of cosine button
-        btnCos = new JButton("Cos");
-        btnCos.setBounds(x[5],y[1],wBtn,hBtn);
-        btnCos.setFont(btnfont);
-        btnCos.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnCos.addActionListener(event -> {
-             repaintFont();
-                 if (go) {
-                            String displayText = inText.getText();
-                            Double value = Double.valueOf(displayText);
-                            Double radians = Math.toRadians(value);
-                            
-                            DecimalFormat format =  new DecimalFormat("##0.00"); 
-                            inText.setText("" + format.format(Math.cos(radians)));
-                            ans = format.format(Math.cos(radians));
-                     }
-                     go = false;
-                     addWrite = false;
-            
-         });
-         window.getContentPane().add(btnCos);
-        //end of cosine button
-         
-         
-         //start of Tan button
-         btnTan = new JButton("Tan");
-         btnTan.setBounds(x[5],y[2],wBtn,hBtn);
-         btnTan.setFont(btnfont);
-         btnTan.setCursor(new Cursor(Cursor.HAND_CURSOR));
-         btnTan.addActionListener(event -> {
-              repaintFont();
-                  if (go) {
-                            String displayText = inText.getText();
-                            Double value = Double.valueOf(displayText);
-                            Double radians = Math.toRadians(value);
-                            
-                            DecimalFormat format =  new DecimalFormat("##0.00"); 
-                            inText.setText("" + format.format(Math.tan(radians)));
-                            ans = "" + format.format(Math.tan(radians));
-                      }
-                      go = false;
-                      addWrite = false;
-             
-          });
-          window.getContentPane().add(btnTan);
-         //end of Tan button
-          
-          
-          //start of sine button
-          btnSin = new JButton("Sin");
-          btnSin.setBounds(x[5],y[3],wBtn,hBtn);
-          btnSin.setFont(btnfont);
-          btnSin.setCursor(new Cursor(Cursor.HAND_CURSOR));
-          btnSin.addActionListener(event -> {
-               repaintFont();
-                   if (go) {
-                            String displayText = inText.getText();
-                            Double value = Double.valueOf(displayText);
-                            Double radians = Math.toRadians(value);
-                            
-                            DecimalFormat format =  new DecimalFormat("##0.00"); 
-                            inText.setText("" + format.format(Math.sin(radians)));
-                            ans = "" + format.format(Math.sin(radians));
-                       }
-                       go = false;
-                       addWrite = false;
-              
-           });
-           window.getContentPane().add(btnSin);
-          //end of sine button
-           
-        
-         
-        btnMod = new JButton("%");
-        btnMod.setBounds(x[2],y[1],wBtn,hBtn);
-        btnMod.setFont(btnFont);
-        btnMod.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnMod.addActionListener(event -> {
-           repaintFont();
-            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go) {
-                    val = calc(val, inText.getText(), opt);
-                    //Edited
-                    
-                    //end
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
-                        inText.setText(String.valueOf((int) val));
-                        ans = String.valueOf((int) val);
-                    } else {
-                        inText.setText(String.valueOf(val));
-                        ans = String.valueOf(val);
-                    }
-                    opt = '%';
-                    go = false;
-                    addWrite = false;
-                }
-        });
-        window.getContentPane().add(btnMod);
-        
-        btnDiv = new JButton("/");
-        btnDiv.setBounds(x[3],y[1],wBtn,hBtn);
-        btnDiv.setFont(btnFont);
-        btnDiv.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnDiv.addActionListener(event -> {
-            repaintFont();
-            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go) {
-                    val = calc(val, inText.getText(), opt);
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
-                        inText.setText(String.valueOf((int) val));
-                        ans = String.valueOf((int) val);
-                    } else {
-                        inText.setText(String.valueOf(val));
-                        ans = String.valueOf(val);
-                    }
-                    opt = '/';
-                    go = false;
-                    addWrite = false;
-                } else {
-                    opt = '/';
-                }
-        });
-        window.getContentPane().add(btnDiv);
-        
-        btn7 = new JButton("7");
-        btn7.setBounds(x[0],y[2],wBtn,hBtn);
-        btn7.setFont(btnFont);
-        btn7.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn7.addActionListener(event -> {
-            repaintFont();
-            if (addWrite) {
-                if (Pattern.matches("[0]*", inText.getText())) {
-                    inText.setText("7");
-                } else {
-                    inText.setText(inText.getText() + "7");
-                }
-            } else {
-                inText.setText("7");
-                addWrite = true;
-            }
-            go = true;
-        });
-        window.getContentPane().add(btn7);
-        
-        btn8 = new JButton("8");
-        btn8.setBounds(x[1],y[2],wBtn,hBtn);
-        btn8.setFont(btnFont);
-        btn8.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn8.addActionListener(event -> {
-            repaintFont();
-            if (addWrite) {
-                if (Pattern.matches("[0]*", inText.getText())) {
-                    inText.setText("8");
-                } else {
-                    inText.setText(inText.getText() + "8");
-                }
-            } else {
-                inText.setText("8");
-                addWrite = true;
-            }
-            go = true;
-        });
-        window.getContentPane().add(btn8);
-        
-        btn9 = new JButton("9");
-        btn9.setBounds(x[2],y[2],wBtn,hBtn);
-        btn9.setFont(btnFont);
-        btn9.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn9.addActionListener(event -> {
-            repaintFont();
-            if (addWrite) {
-                if (Pattern.matches("[0]*", inText.getText())) {
-                    inText.setText("9");
-                } else {
-                    inText.setText(inText.getText() + "9");
-                }
-            } else {
-                inText.setText("9");
-                addWrite = true;
-            }
-            go = true;
-        });
-        window.getContentPane().add(btn9);
-        
-        btnMul = new JButton("*");
-        btnMul.setBounds(x[3],y[2],wBtn,hBtn);
-        btnMul.setFont(btnFont);
-        btnMul.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnMul.addActionListener(event -> {
-            repaintFont();
-            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go) {
-                    val = calc(val, inText.getText(), opt);
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
-                        inText.setText(String.valueOf((int) val));
-                        ans = String.valueOf((int) val);
-                    } else {
-                        inText.setText(String.valueOf(val));
-                        ans = String.valueOf(val);
-                    }
-                    opt = '*';
-                    go = false;
-                    addWrite = false;
-                } else {
-                    opt = '*';
-                }
-        });
-        window.getContentPane().add(btnMul);
-        
-        btn4 = new JButton("4");
-        btn4.setBounds(x[0],y[3],wBtn,hBtn);
-        btn4.setFont(btnFont);
-        btn4.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn4.addActionListener(event -> {
-            repaintFont();
-            if (addWrite) {
-                if (Pattern.matches("[0]*", inText.getText())) {
-                    inText.setText("4");
-                } else {
-                    inText.setText(inText.getText() + "4");
-                }
-            } else {
-                inText.setText("4");
-                addWrite = true;
-            }
-            go = true;
-        });
-        window.getContentPane().add(btn4);
-        
-        btn5 = new JButton("5");
-        btn5.setBounds(x[1],y[3],wBtn,hBtn);
-        btn5.setFont(btnFont);
-        btn5.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn5.addActionListener(event -> {
-            repaintFont();
-            if (addWrite) {
-                if (Pattern.matches("[0]*", inText.getText())) {
-                    inText.setText("5");
-                } else {
-                    inText.setText(inText.getText() + "5");
-                }
-            } else {
-                inText.setText("5");
-                addWrite = true;
-            }
-            go = true;
-        });
-        window.getContentPane().add(btn5);
-        
-        btn6 = new JButton("6");
-        btn6.setBounds(x[2],y[3],wBtn,hBtn);
-        btn6.setFont(btnFont);
-        btn6.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn6.addActionListener(event -> {
-            repaintFont();
-            if (addWrite) {
-                if (Pattern.matches("[0]*", inText.getText())) {
-                    inText.setText("6");
-                } else {
-                    inText.setText(inText.getText() + "6");
-                }
-            } else {
-                inText.setText("6");
-                addWrite = true;
-            }
-            go = true;
-        });
-        window.getContentPane().add(btn6);
-        
-        btnSub = new JButton("-");
-        btnSub.setBounds(x[3],y[3],wBtn,hBtn);
-        btnSub.setFont(btnFont);
-        btnSub.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnSub.addActionListener(event -> {
-            repaintFont();
-            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go) {
-                    val = calc(val, inText.getText(), opt);
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
-                        inText.setText(String.valueOf((int) val));
-                        ans = String.valueOf((int) val);
-                    } else {
-                        inText.setText(String.valueOf(val));
-                        ans = String.valueOf(val);
-                    }
+        btnzero(x,y,wBtn,hBtn,btn0,btnFont);
+        btn1(x,y,wBtn,hBtn,btn1,btnFont);
+        btn2(x,y,wBtn,hBtn,btn2,btnFont);
+        btn3(x,y,wBtn,hBtn,btn3,btnFont);
+        btn4(x,y,wBtn,hBtn,btn4,btnFont);
+        btn5(x,y,wBtn,hBtn,btn5,btnFont);
+        btn6(x,y,wBtn,hBtn,btn6,btnFont);
+        btn7(x,y,wBtn,hBtn,btn7,btnFont);
+        btn8(x,y,wBtn,hBtn,btn8,btnFont);
+        btn9(x,y,wBtn,hBtn,btn9,btnFont);
+        btnC(x,y,wBtn,hBtn,btnC,btnFont);
+        btnBack(x,y,wBtn,hBtn,btnBack,btnFont);
+        btnMod(x,y,wBtn,hBtn,btnMod,btnFont);
+        btnDiv(x,y,wBtn,hBtn,btnDiv,btnFont);
+        btnMul(x,y,wBtn,hBtn,btnMul,btnFont);
+        btnSub(x,y,wBtn,hBtn,btnSub,btnFont);   
+        btnAdd(x,y,wBtn,hBtn,btnAdd,btnFont);  
+        btnPoint(x,y,wBtn,hBtn,btnPoint,btnFont);
+        btnEqual(x,y,wBtn,hBtn,btnEqual,btnFont); 
+        btnSqrt(x,y,wBtn,hBtn,btnSqrt,btnFont); 
+        btnCos(x,y,wBtn,hBtn,btnCos,btnFont); 
+        btnTan(x,y,wBtn,hBtn,btnTan,btnFont); 
+        btnSin(x,y,wBtn,hBtn,btnSin,btnFont); 
+    
 
-                    opt = '-';
-                    go = false;
-                    addWrite = false;
-                } else {
-                    opt = '-';
-                }
-        });
-        window.getContentPane().add(btnSub);
-        
-        btn1 = new JButton("1");
-        btn1.setBounds(x[0],y[4],wBtn,hBtn);
-        btn1.setFont(btnFont);
-        btn1.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn1.addActionListener(event -> {
-            repaintFont();
-            if (addWrite) {
-                if (Pattern.matches("[0]*", inText.getText())) {
-                    inText.setText("1");
-                } else {
-                    inText.setText(inText.getText() + "1");
-                }
-            } else {
-                inText.setText("1");
-                addWrite = true;
-            }
-            go = true;
-        });
-        window.getContentPane().add(btn1);
-        
-        btn2 = new JButton("2");
-        btn2.setBounds(x[1],y[4],wBtn,hBtn);
-        btn2.setFont(btnFont);
-        btn2.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn2.addActionListener(event -> {
-            repaintFont();
-            if (addWrite) {
-                if (Pattern.matches("[0]*", inText.getText())) {
-                    inText.setText("2");
-                } else {
-                    inText.setText(inText.getText() + "2");
-                }
-            } else {
-                inText.setText("2");
-                addWrite = true;
-            }
-            go = true;
-        });
-        window.getContentPane().add(btn2);
-        
-        btn3 = new JButton("3");
-        btn3.setBounds(x[2], y[4], wBtn, hBtn);
-        btn3.setFont(btnFont);
-        btn3.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn3.addActionListener(event -> {
-            repaintFont();
-            if (addWrite) {
-                if (Pattern.matches("[0]*", inText.getText())) {
-                    inText.setText("3");
-                } else {
-                    inText.setText(inText.getText() + "3");
-                }
-            } else {
-                inText.setText("3");
-                addWrite = true;
-            }
-            go = true;
-        });
-        window.getContentPane().add(btn3);
-        
-        btnAdd = new JButton("+");
-        btnAdd.setBounds(x[3], y[4], wBtn, hBtn);
-        btnAdd.setFont(btnFont);
-        btnAdd.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnAdd.addActionListener(event -> {
-            repaintFont();
-            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go) {
-                    val = calc(val, inText.getText(), opt);
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
-                        inText.setText(String.valueOf((int) val));
-                        ans = String.valueOf((int) val);
-                    } else {
-                        inText.setText(String.valueOf(val));
-                        ans = String.valueOf(val);
-                    }
-                    opt = '+';
-                    go = false;
-                    addWrite = false;
-                } else {
-                    opt = '+';
-                }
-        });
-        window.getContentPane().add(btnAdd);
-        
-        btnPoint = new JButton(".");
-        btnPoint.setBounds(x[0],y[5],wBtn,hBtn);
-        btnPoint.setFont(new Font("Comic Sans MS", Font.BOLD, 32));
-        btnPoint.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnPoint.addActionListener(event -> {
-            repaintFont();
-            if (addWrite) {
-                inText.setText(inText.getText() + ".");
-            } else {
-                inText.setText("0.");
-                addWrite = true;
-            }
-            go = true;
-        });
-        window.getContentPane().add(btnPoint);
-        
-        btn0 = new JButton("0");
-        btn0.setBounds(x[1],y[5],wBtn,hBtn);
-        btn0.setFont(btnFont);
-        btn0.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btn0.addActionListener(event -> {
-            repaintFont();
-            if (addWrite) {
-                if (Pattern.matches("[0]*", inText.getText())) {
-                    inText.setText("0");
-                } else {
-                    inText.setText(inText.getText() + "0");
-                }
-            } else {
-                inText.setText("0");
-                addWrite = true;
-            }
-            go = true;
-        });
-        window.getContentPane().add(btn0);
-        
-        btnEqual = new JButton("=");
-        btnEqual.setBounds(x[2],y[5],2*wBtn+10,hBtn);
-        btnEqual.setFont(btnFont);
-        btnEqual.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnEqual.addActionListener(event -> {
-            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
-                if (go) {
-                    val = calc(val, inText.getText(), opt);
-                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
-                        inText.setText(String.valueOf((int) val));
-                        ans = String.valueOf((int) val);
-                    } else {
-                        inText.setText(String.valueOf(val));
-                        ans = String.valueOf(val);
-                    }
-                    opt = '=';
-                    addWrite = false;
-                }
-        });
-        window.getContentPane().add(btnEqual);
-        window.getContentPane().setLayout(null);
-       
          btnMC = new JButton("MC");
          btnEqual.setFont(btnFont);
          btnMC.setBounds(x[4],y[3],wBtn,hBtn);
@@ -904,12 +438,6 @@ public class Calculator {
             window.getContentPane().add(btnans);
             //End of ans Buttton
            
-            
-      
-            
-             
-            
-            
             btnCosh = new JButton("CosH");
             btnCosh.setBounds(x[8],y[4],wBtn,hBtn);;
             btnCosh.setFont(btnfont);
@@ -929,13 +457,6 @@ public class Calculator {
              });
 
              window.getContentPane().add(  btnCosh);   
-
-              btnMin = new JButton("Min");
-            btnMin.setBounds(x[9],y[4],wBtn,hBtn);
-            btnMin.setFont(btnfont);
-            btnMin.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            btnMin.addActionListener(event -> {
-
   
              //start of button nCr
              btnnCr = new JButton("nCr");
@@ -966,7 +487,6 @@ public class Calculator {
             btnnPr.setFont(btnfont);
             btnnPr.setCursor(new Cursor(Cursor.HAND_CURSOR));
             btnnPr.addActionListener(event -> {
-
                  repaintFont();
                  if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
                      if (go) {
@@ -976,20 +496,11 @@ public class Calculator {
                          } else {
                              inText.setText(String.valueOf(val));
                          }
-
-                         opt = 'M';
-
                          opt = 'P';
-
                          go = false;
                          addWrite = false;
                      }   
              });
-
-             window.getContentPane().add(btnMin);
-           
-      
-
              window.getContentPane().add(btnnPr);
              //end of button nPr    
              
@@ -1177,7 +688,6 @@ public class Calculator {
 
                 // end of decimal to binary
                     
-
         btnBMI = new JButton("BMI");
         btnBMI.setBounds(x[6],y[4],wBtn,hBtn);
         btnBMI.setFont(btnfont);
@@ -1201,11 +711,576 @@ public class Calculator {
         
     
     }
-  
-        
+ 
+
+
+	
+	private void btnSin(int[] x, int[] y, int wBtn, int hBtn, JButton btnSin2, Font btnFont) {
+        btnSin = new JButton("Sin");
+        btnSin.setBounds(x[5],y[3],wBtn,hBtn);
+        btnSin.setFont(btnFont);
+        btnSin.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnSin.addActionListener(event -> {
+             repaintFont();
+                 if (go) {
+                          String displayText = inText.getText();
+                          Double value = Double.valueOf(displayText);
+                          Double radians = Math.toRadians(value);
+                          
+                          DecimalFormat format =  new DecimalFormat("##0.00"); 
+                          inText.setText("" + format.format(Math.sin(radians)));
+                          ans = "" + format.format(Math.sin(radians));
+                     }
+                     go = false;
+                     addWrite = false;
+            
+         });
+         window.getContentPane().add(btnSin);
+		
+	}
+
+
+
+
+	private void btnTan(int[] x, int[] y, int wBtn, int hBtn, JButton btnTan2, Font btnFont) {
+		  btnTan = new JButton("Tan");
+	         btnTan.setBounds(x[5],y[2],wBtn,hBtn);
+	         btnTan.setFont(btnFont);
+	         btnTan.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	         btnTan.addActionListener(event -> {
+	              repaintFont();
+	                  if (go) {
+	                            String displayText = inText.getText();
+	                            Double value = Double.valueOf(displayText);
+	                            Double radians = Math.toRadians(value);
+	                            
+	                            DecimalFormat format =  new DecimalFormat("##0.00"); 
+	                            inText.setText("" + format.format(Math.tan(radians)));
+	                            ans = "" + format.format(Math.tan(radians));
+	                      }
+	                      go = false;
+	                      addWrite = false;
+	             
+	          });
+	          window.getContentPane().add(btnTan);		
+	}
+
+
+
+
+	private void btnCos(int[] x, int[] y, int wBtn, int hBtn, JButton btnCos2, Font btnFont) {
+        btnCos = new JButton("Cos");
+        btnCos.setBounds(x[5],y[1],wBtn,hBtn);
+        btnCos.setFont(btnFont);
+        btnCos.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnCos.addActionListener(event -> {
+             repaintFont();
+                 if (go) {
+                            String displayText = inText.getText();
+                            Double value = Double.valueOf(displayText);
+                            Double radians = Math.toRadians(value);
+                            
+                            DecimalFormat format =  new DecimalFormat("##0.00"); 
+                            inText.setText("" + format.format(Math.cos(radians)));
+                            ans = format.format(Math.cos(radians));
+                     }
+                     go = false;
+                     addWrite = false;
+            
+         });
+         window.getContentPane().add(btnCos);		
+	}
+
+
+
+
+	private void btnSqrt(int[] x, int[] y, int wBtn, int hBtn, JButton btnSqrt2, Font btnFont) {
+	       btnSqrt = new JButton("sqrt");
+	       btnSqrt.setBounds(x[4],y[1],wBtn,hBtn);
+	       btnSqrt.setFont(btnFont);
+	       btnSqrt.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	     btnSqrt.addActionListener(event -> {
+	            repaintFont();
+	           if(go) {
+	               String displayText = inText.getText();
+	               Double value = Double.valueOf(displayText);
+	               inText.setText(""+Math.sqrt(value));
+	               ans = ""+Math.sqrt(value);
+	           }
+	           go = false;
+	           addWrite = false;
+	        });
+	        window.getContentPane().add(btnSqrt);
+	        
+		
+	}
+
+
+
+
+	private void btnEqual(int[] x, int[] y, int wBtn, int hBtn, JButton btnEqual2, Font btnFont) {
+        btnEqual = new JButton("=");
+        btnEqual.setBounds(x[2],y[5],2*wBtn+10,hBtn);
+        btnEqual.setFont(btnFont);
+        btnEqual.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnEqual.addActionListener(event -> {
+            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
+                if (go) {
+                    val = calc(val, inText.getText(), opt);
+                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
+                        inText.setText(String.valueOf((int) val));
+                        ans = String.valueOf((int) val);
+                    } else {
+                        inText.setText(String.valueOf(val));
+                        ans = String.valueOf(val);
+                    }
+                    opt = '=';
+                    addWrite = false;
+                }
+        });
+        window.getContentPane().add(btnEqual);
+        window.getContentPane().setLayout(null);
+		
+	}
+
+
+
+
+	private void btnPoint(int[] x, int[] y, int wBtn, int hBtn, JButton btnPoint2, Font btnFont) {
+	    btnPoint = new JButton(".");
+        btnPoint.setBounds(x[0],y[5],wBtn,hBtn);
+        btnPoint.setFont(new Font("Comic Sans MS", Font.BOLD, 32));
+        btnPoint.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnPoint.addActionListener(event -> {
+            repaintFont();
+            if (addWrite) {
+                inText.setText(inText.getText() + ".");
+            } else {
+                inText.setText("0.");
+                addWrite = true;
+            }
+            go = true;
+        });
+        window.getContentPane().add(btnPoint);
+	}
+	
+	private void btnAdd(int[] x, int[] y, int wBtn, int hBtn, JButton btnAdd2, Font btnFont) {
+        btnAdd = new JButton("+");
+        btnAdd.setBounds(x[3], y[4], wBtn, hBtn);
+        btnAdd.setFont(btnFont);
+        btnAdd.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnAdd.addActionListener(event -> {
+            repaintFont();
+            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
+                if (go) {
+                    val = calc(val, inText.getText(), opt);
+                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
+                        inText.setText(String.valueOf((int) val));
+                        ans = String.valueOf((int) val);
+                    } else {
+                        inText.setText(String.valueOf(val));
+                        ans = String.valueOf(val);
+                    }
+                    opt = '+';
+                    go = false;
+                    addWrite = false;
+                } else {
+                    opt = '+';
+                }
+        });
+        window.getContentPane().add(btnAdd);
+		
+	}
+
+
+
+
+	private void btnSub(int[] x, int[] y, int wBtn, int hBtn, JButton btnSub2, Font btnFont) {
+        btnSub = new JButton("-");
+        btnSub.setBounds(x[3],y[3],wBtn,hBtn);
+        btnSub.setFont(btnFont);
+        btnSub.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnSub.addActionListener(event -> {
+            repaintFont();
+            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
+                if (go) {
+                    val = calc(val, inText.getText(), opt);
+                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
+                        inText.setText(String.valueOf((int) val));
+                        ans = String.valueOf((int) val);
+                    } else {
+                        inText.setText(String.valueOf(val));
+                        ans = String.valueOf(val);
+                    }
+
+                    opt = '-';
+                    go = false;
+                    addWrite = false;
+                } else {
+                    opt = '-';
+                }
+        });
+        window.getContentPane().add(btnSub);
+	}
+
+	private void btnMul(int[] x, int[] y, int wBtn, int hBtn, JButton btnMul2, Font btnFont) {
+        btnMul = new JButton("*");
+        btnMul.setBounds(x[3],y[2],wBtn,hBtn);
+        btnMul.setFont(btnFont);
+        btnMul.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnMul.addActionListener(event -> {
+            repaintFont();
+            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
+                if (go) {
+                    val = calc(val, inText.getText(), opt);
+                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
+                        inText.setText(String.valueOf((int) val));
+                        ans = String.valueOf((int) val);
+                    } else {
+                        inText.setText(String.valueOf(val));
+                        ans = String.valueOf(val);
+                    }
+                    opt = '*';
+                    go = false;
+                    addWrite = false;
+                } else {
+                    opt = '*';
+                }
+        });
+        window.getContentPane().add(btnMul);
+		
+	}
+
+	private void btnDiv(int[] x, int[] y, int wBtn, int hBtn, JButton btnDiv2, Font btnFont) {
+        btnDiv = new JButton("/");
+        btnDiv.setBounds(x[3],y[1],wBtn,hBtn);
+        btnDiv.setFont(btnFont);
+        btnDiv.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnDiv.addActionListener(event -> {
+            repaintFont();
+            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
+                if (go) {
+                    val = calc(val, inText.getText(), opt);
+                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
+                        inText.setText(String.valueOf((int) val));
+                        ans = String.valueOf((int) val);
+                    } else {
+                        inText.setText(String.valueOf(val));
+                        ans = String.valueOf(val);
+                    }
+                    opt = '/';
+                    go = false;
+                    addWrite = false;
+                } else {
+                    opt = '/';
+                }
+        });
+        window.getContentPane().add(btnDiv);
         
 
-    private double calc(double x, String input, char opt) {
+		
+	}
+
+
+
+
+	private void btnMod(int[] x, int[] y, int wBtn, int hBtn, JButton btnMod2, Font btnFont) {
+        btnMod = new JButton("%");
+        btnMod.setBounds(x[2],y[1],wBtn,hBtn);
+        btnMod.setFont(btnFont);
+        btnMod.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnMod.addActionListener(event -> {
+           repaintFont();
+            if (Pattern.matches("([-]?\\d+[.]\\d*)|(\\d+)", inText.getText()))
+                if (go) {
+                    val = calc(val, inText.getText(), opt);
+                    //Edited
+                    
+                    //end
+                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(val))) {
+                        inText.setText(String.valueOf((int) val));
+                        ans = String.valueOf((int) val);
+                    } else {
+                        inText.setText(String.valueOf(val));
+                        ans = String.valueOf(val);
+                    }
+                    opt = '%';
+                    go = false;
+                    addWrite = false;
+                }
+        });
+        window.getContentPane().add(btnMod);
+		
+	}
+
+
+
+
+	private void btnC(int[] x, int[] y, int wBtn, int hBtn, JButton btnC2, Font btnFont) {
+		   
+        btnC = new JButton("C");
+        btnC.setBounds(x[0],y[1],wBtn,hBtn);
+        btnC.setFont(btnFont);
+        btnC.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnC.addActionListener(event -> {
+            repaintFont();
+            inText.setText("0");
+            opt = ' ';
+            val = 0;
+        });
+        window.getContentPane().add(btnC);
+		
+	}
+	private void btnBack(int[] x, int[] y, int wBtn, int hBtn, JButton btnBack2, Font btnFont) {
+        btnBack = new JButton("<-");
+        btnBack.setBounds(x[1],y[1],wBtn,hBtn);
+        btnBack.setFont(btnFont);
+        btnBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnBack.addActionListener(event -> {
+            repaintFont();
+            String str = inText.getText();
+            StringBuilder str2 = new StringBuilder();
+            for (i = 0; i < (str.length() - 1); i++) {
+                str2.append(str.charAt(i));
+            }
+            if (str2.toString().equals("")) {
+                inText.setText("0");
+            } else {
+                inText.setText(str2.toString());
+            }
+        });
+        window.getContentPane().add(btnBack);
+		
+	}
+	
+	private void btnzero(int x[], int y[], int wBtn, int hBtn, JButton btn02, Font btnFont) {
+    		btn0 = new JButton("0");
+         btn0.setBounds(x[1],y[5],wBtn,hBtn);
+         btn0.setFont(btnFont);
+         btn0.setCursor(new Cursor(Cursor.HAND_CURSOR));
+         btn0.addActionListener(event -> {
+             repaintFont();
+             if (addWrite) {
+                 if (Pattern.matches("[0]*", inText.getText())) {
+                     inText.setText("0");
+                 } else {
+                     inText.setText(inText.getText() + "0");
+                 }
+             } else {
+                 inText.setText("0");
+                 addWrite = true;
+             }
+             go = true;
+         });
+         window.getContentPane().add(btn0);		
+	}
+
+
+    private void btn1(int[] x, int[] y, int wBtn, int hBtn, JButton btn12, Font btnFont) {
+    	  btn1 = new JButton("1");
+          btn1.setBounds(x[0],y[4],wBtn,hBtn);
+          btn1.setFont(btnFont);
+          btn1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+          btn1.addActionListener(event -> {
+              repaintFont();
+              if (addWrite) {
+                  if (Pattern.matches("[0]*", inText.getText())) {
+                      inText.setText("1");
+                  } else {
+                      inText.setText(inText.getText() + "1");
+                  }
+              } else {
+                  inText.setText("1");
+                  addWrite = true;
+              }
+              go = true;
+          });
+          window.getContentPane().add(btn1);
+		
+	}
+	private void btn2(int[] x, int[] y, int wBtn, int hBtn, JButton btn22, Font btnFont) {
+        btn2 = new JButton("2");
+        btn2.setBounds(x[1],y[4],wBtn,hBtn);
+        btn2.setFont(btnFont);
+        btn2.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btn2.addActionListener(event -> {
+            repaintFont();
+            if (addWrite) {
+                if (Pattern.matches("[0]*", inText.getText())) {
+                    inText.setText("2");
+                } else {
+                    inText.setText(inText.getText() + "2");
+                }
+            } else {
+                inText.setText("2");
+                addWrite = true;
+            }
+            go = true;
+        });
+        window.getContentPane().add(btn2);
+		
+	}
+	
+	private void btn3(int[] x, int[] y, int wBtn, int hBtn, JButton btn32, Font btnFont) {
+        btn3 = new JButton("3");
+        btn3.setBounds(x[2], y[4], wBtn, hBtn);
+        btn3.setFont(btnFont);
+        btn3.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btn3.addActionListener(event -> {
+            repaintFont();
+            if (addWrite) {
+                if (Pattern.matches("[0]*", inText.getText())) {
+                    inText.setText("3");
+                } else {
+                    inText.setText(inText.getText() + "3");
+                }
+            } else {
+                inText.setText("3");
+                addWrite = true;
+            }
+            go = true;
+        });
+        window.getContentPane().add(btn3);
+		
+	}
+	private void btn4(int[] x, int[] y, int wBtn, int hBtn, JButton btn42, Font btnFont) {
+	     btn4 = new JButton("4");
+	        btn4.setBounds(x[0],y[3],wBtn,hBtn);
+	        btn4.setFont(btnFont);
+	        btn4.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	        btn4.addActionListener(event -> {
+	            repaintFont();
+	            if (addWrite) {
+	                if (Pattern.matches("[0]*", inText.getText())) {
+	                    inText.setText("4");
+	                } else {
+	                    inText.setText(inText.getText() + "4");
+	                }
+	            } else {
+	                inText.setText("4");
+	                addWrite = true;
+	            }
+	            go = true;
+	        });
+	        window.getContentPane().add(btn4);
+		
+	}
+	private void btn5(int[] x, int[] y, int wBtn, int hBtn, JButton btn52, Font btnFont) {
+	    btn5 = new JButton("5");
+       btn5.setBounds(x[1],y[3],wBtn,hBtn);
+       btn5.setFont(btnFont);
+       btn5.setCursor(new Cursor(Cursor.HAND_CURSOR));
+       btn5.addActionListener(event -> {
+           repaintFont();
+           if (addWrite) {
+               if (Pattern.matches("[0]*", inText.getText())) {
+                   inText.setText("5");
+               } else {
+                   inText.setText(inText.getText() + "5");
+               }
+           } else {
+               inText.setText("5");
+               addWrite = true;
+           }
+           go = true;
+       });
+       window.getContentPane().add(btn5);
+		
+	}
+	private void btn6(int[] x, int[] y, int wBtn, int hBtn, JButton btn62, Font btnFont) {
+		   btn6 = new JButton("6");
+	        btn6.setBounds(x[2],y[3],wBtn,hBtn);
+	        btn6.setFont(btnFont);
+	        btn6.setCursor(new Cursor(Cursor.HAND_CURSOR));
+	        btn6.addActionListener(event -> {
+	            repaintFont();
+	            if (addWrite) {
+	                if (Pattern.matches("[0]*", inText.getText())) {
+	                    inText.setText("6");
+	                } else {
+	                    inText.setText(inText.getText() + "6");
+	                }
+	            } else {
+	                inText.setText("6");
+	                addWrite = true;
+	            }
+	            go = true;
+	        });
+	        window.getContentPane().add(btn6);
+		
+	}
+	private void btn7(int[] x, int[] y, int wBtn, int hBtn, JButton btn72, Font btnFont) {
+     btn7 = new JButton("7");
+     btn7.setBounds(x[0],y[2],wBtn,hBtn);
+     btn7.setFont(btnFont);
+     btn7.setCursor(new Cursor(Cursor.HAND_CURSOR));
+     btn7.addActionListener(event -> {
+         repaintFont();
+         if (addWrite) {
+             if (Pattern.matches("[0]*", inText.getText())) {
+                 inText.setText("7");
+             } else {
+                 inText.setText(inText.getText() + "7");
+             }
+         } else {
+             inText.setText("7");
+             addWrite = true;
+         }
+         go = true;
+     });
+     window.getContentPane().add(btn7);
+
+
+		
+	}
+	private void btn8(int[] x, int[] y, int wBtn, int hBtn, JButton btn82, Font btnFont) {
+     
+     btn8 = new JButton("8");
+     btn8.setBounds(x[1],y[2],wBtn,hBtn);
+     btn8.setFont(btnFont);
+     btn8.setCursor(new Cursor(Cursor.HAND_CURSOR));
+     btn8.addActionListener(event -> {
+         repaintFont();
+         if (addWrite) {
+             if (Pattern.matches("[0]*", inText.getText())) {
+                 inText.setText("8");
+             } else {
+                 inText.setText(inText.getText() + "8");
+             }
+         } else {
+             inText.setText("8");
+             addWrite = true;
+         }
+         go = true;
+     });
+     window.getContentPane().add(btn8);
+     
+		
+	}
+	private void btn9(int[] x, int[] y, int wBtn, int hBtn, JButton btn92, Font btnFont) {
+     btn9 = new JButton("9");
+     btn9.setBounds(x[2],y[2],wBtn,hBtn);
+     btn9.setFont(btnFont);
+     btn9.setCursor(new Cursor(Cursor.HAND_CURSOR));
+     btn9.addActionListener(event -> {
+         repaintFont();
+         if (addWrite) {
+             if (Pattern.matches("[0]*", inText.getText())) {
+                 inText.setText("9");
+             } else {
+                 inText.setText(inText.getText() + "9");
+             }
+         } else {
+             inText.setText("9");
+             addWrite = true;
+         }
+         go = true;
+     });
+     window.getContentPane().add(btn9);
+		
+	}
+	
+	private double calc(double x, String input, char opt) {
         inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
         double y = Double.parseDouble(input);
         if (opt == '+') {
@@ -1222,10 +1297,6 @@ public class Calculator {
         else if(opt == '^'){
         	return Math.pow(x,y);
         }
-
-        else if(opt == 'M') {
-            return Math.min(x, y);
-    }
         else if(opt == '\u221A') {
         	return Math.pow(y,1/x);
         }
@@ -1241,7 +1312,6 @@ public class Calculator {
         else if(opt == 'N') {
             return Math.max(x, y);
         }
-
         inText.setFont(inText.getFont().deriveFont(Font.PLAIN));
         return y;
     }
@@ -1433,4 +1503,3 @@ public class Calculator {
         new Calculator();
     }
 }
-
