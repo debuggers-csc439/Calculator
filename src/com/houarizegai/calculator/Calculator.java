@@ -20,7 +20,7 @@ public class Calculator {
     private JButton btnC, btnBack, btnMod, btnDiv, btn7, btn8, btn9,
             btnMul, btn4, btn5, btn6, btnSub, btn1, btn2, btn3, btnAdd, btnPoint, btn0, btnEqual,btnSqrt,btnCos,
             btnMC, btnMR, btnMplus,btnMS, colorChoice,btnBMI,btnTan,btnSin, btnFactorial ,btnInverse, btnLog,btnln,
-            btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh,btnAbs;
+            btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh,btnAbs, btnCot;
     private char opt = ' ';             // Storage Oparator
     private boolean go = true,          // Faire Calcule Avec Opt != (=)
             addWrite = true;    // RacordÃˆ des Nombres dans l'Affichage
@@ -960,6 +960,27 @@ public class Calculator {
              });
 
              window.getContentPane().add(  btnCosh);   
+        
+        btnCot = new JButton("Cot");
+                     btnCot.setBounds(x[10],y[6],wBtn,hBtn);
+                     btnCot.setFont(btnfont);
+                     btnCot.setCursor(new Cursor(Cursor.HAND_CURSOR));
+                     btnCot.addActionListener(event -> {
+                          repaintFont();
+                              if (go) {
+                                        String displayText = inText.getText();
+                                        Double value = Double.valueOf(displayText);
+                                        Double radians = Math.toRadians(value);
+                                        
+                                        DecimalFormat format =  new DecimalFormat("##0.00"); 
+                                        inText.setText("" + format.format(1.0/Math.tan(radians)));
+                                        ans = "" + format.format(1.0/Math.tan(radians));
+                                  }
+                                  go = false;
+                                  addWrite = false;
+                         
+                      });
+                      window.getContentPane().add(btnCot);
       
         btnBMI = new JButton("BMI");
         btnBMI.setBounds(x[6],y[4],wBtn,hBtn);
