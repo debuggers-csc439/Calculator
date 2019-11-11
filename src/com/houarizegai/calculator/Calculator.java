@@ -20,11 +20,14 @@ public class Calculator {
     private JButton btnC, btnBack, btnMod, btnDiv, btn7, btn8, btn9,
             btnMul, btn4, btn5, btn6, btnSub, btn1, btn2, btn3, btnAdd, btnPoint, btn0, btnEqual,btnSqrt,btnCos,
             btnMC, btnMR, btnMplus,btnMS, colorChoice,btnBMI,btnTan,btnSin, btnFactorial ,btnInverse, btnLog,btnln,
-            btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh,btnBinarytoDecimal,btnNthRoot,
 
-            btnEpowX,btnDecimalToBinary,btnnPr,btnnCr,btnans,btnMax,btnMin,btnComma,btnAbs,btnCsc;
+            btnExponential,btnSquare, btnArcCos, btn10powX, btnSineInverse, btnArcTan,btnCubeRoot,btnXpowX,btnSinH,btnTanH,btnCosh,
+            btnBinarytoDecimal,btnNthRoot,btnEpowX,btnDecimalToBinary,btnnPr,btnnCr,btnans,btnMax,btnMin,btnComma,btnAbs
+            ,btnCot;
 
-            btnEpowX,btnDecimalToBinary,btnnPr,btnnCr,btnans,btnMax,btnMin,btnComma,btnAbs;
+
+           
+
 
     private char opt = ' ';             // Storage Oparator
     private boolean go = true,          // Faire Calcule Avec Opt != (=)
@@ -43,7 +46,7 @@ public class Calculator {
         window.setLocationRelativeTo(null); // Move Window To Center
         
         Font btnFont = new Font("Times New Roman", Font.PLAIN, 18);
-        Font btnfont = new Font("Times New Roman", Font.PLAIN, 18);
+ 
         colorChoice = new JButton();
         colorChoice.setBounds(720, 10, 140, 30);
         colorChoice.setText("Toggle colors");
@@ -111,7 +114,7 @@ public class Calculator {
         
         btnSqrt = new JButton("sqrt");
        btnSqrt.setBounds(x[4],y[1],wBtn,hBtn);
-       btnSqrt.setFont(btnfont);
+       btnSqrt.setFont(btnFont);
        btnSqrt.setCursor(new Cursor(Cursor.HAND_CURSOR));
      btnSqrt.addActionListener(event -> {
             repaintFont();
@@ -131,7 +134,7 @@ public class Calculator {
         //start of cosine button
         btnCos = new JButton("Cos");
         btnCos.setBounds(x[5],y[1],wBtn,hBtn);
-        btnCos.setFont(btnfont);
+        btnCos.setFont(btnFont);
         btnCos.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnCos.addActionListener(event -> {
              repaintFont();
@@ -155,7 +158,7 @@ public class Calculator {
          //start of Tan button
          btnTan = new JButton("Tan");
          btnTan.setBounds(x[5],y[2],wBtn,hBtn);
-         btnTan.setFont(btnfont);
+         btnTan.setFont(btnFont);
          btnTan.setCursor(new Cursor(Cursor.HAND_CURSOR));
          btnTan.addActionListener(event -> {
               repaintFont();
@@ -179,7 +182,7 @@ public class Calculator {
           //start of sine button
           btnSin = new JButton("Sin");
           btnSin.setBounds(x[5],y[3],wBtn,hBtn);
-          btnSin.setFont(btnfont);
+          btnSin.setFont(btnFont);
           btnSin.setCursor(new Cursor(Cursor.HAND_CURSOR));
           btnSin.addActionListener(event -> {
                repaintFont();
@@ -590,7 +593,7 @@ public class Calculator {
         
        // Add factorial button and its functionality
         btnFactorial = new JButton("X!");
-        btnFactorial.setFont(btnfont);
+        btnFactorial.setFont(btnFont);
         btnFactorial.setBounds(x[5], y[5], wBtn, hBtn);
         window.getContentPane().add(btnFactorial);
       btnFactorial.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -612,7 +615,7 @@ public class Calculator {
       //start of Log button
       btnLog = new JButton("Log");
       btnLog.setBounds(x[5],y[4],wBtn,hBtn);
-      btnLog.setFont(btnfont);
+      btnLog.setFont(btnFont);
       btnLog.setCursor(new Cursor(Cursor.HAND_CURSOR));
       btnLog.addActionListener(event -> {
            repaintFont();
@@ -632,7 +635,7 @@ public class Calculator {
        //start of ln button
        btnln = new JButton("ln");
        btnln.setBounds(x[6],y[1],wBtn,hBtn);
-       btnln.setFont(btnfont);
+       btnln.setFont(btnFont);
        btnln.setCursor(new Cursor(Cursor.HAND_CURSOR));
        btnln.addActionListener(event -> {
             repaintFont();
@@ -653,7 +656,7 @@ public class Calculator {
        
     // Inverse button calculates the inverse of a given number
        btnInverse = new JButton("Inv");
-       btnInverse.setFont(btnfont);
+       btnInverse.setFont(btnFont);
        btnInverse.setBounds(x[6], y[3], wBtn, hBtn);
        window.getContentPane().add(btnInverse);
        btnInverse.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -672,7 +675,7 @@ public class Calculator {
        
     // x^2 button calculates the square of a given number
        btnSquare = new JButton("x^2");
-       btnSquare.setFont(btnfont);
+       btnSquare.setFont(btnFont);
        btnSquare.setBounds(x[7], y[1], wBtn, hBtn);
        window.getContentPane().add(btnSquare);
        btnSquare.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -695,7 +698,7 @@ public class Calculator {
        
        // cube root button calculates the cube root of a given number
        btnCubeRoot = new JButton("Cbr");
-       btnCubeRoot.setFont(btnfont);
+       btnCubeRoot.setFont(btnFont);
        btnCubeRoot.setBounds(x[7], y[5], wBtn, hBtn);
        window.getContentPane().add(btnCubeRoot);
        btnCubeRoot.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -720,7 +723,7 @@ public class Calculator {
      //Start of arc cos button
        btnArcCos = new JButton("aCos");
        btnArcCos.setBounds(x[6],y[5],wBtn,hBtn);
-       btnArcCos.setFont(btnfont);
+       btnArcCos.setFont(btnFont);
        btnArcCos.setCursor(new Cursor(Cursor.HAND_CURSOR));
        btnArcCos.addActionListener(event -> {
             repaintFont();
@@ -740,7 +743,7 @@ public class Calculator {
        
         btn10powX = new JButton("10^x");
        btn10powX.setBounds(x[7],y[2],wBtn,hBtn);
-       btn10powX.setFont(btnfont);
+       btn10powX.setFont(btnFont);
        btn10powX.setCursor(new Cursor(Cursor.HAND_CURSOR));
        btn10powX.addActionListener(event -> {
              repaintFont();
@@ -759,7 +762,7 @@ public class Calculator {
     
          btnSineInverse = new JButton("aSin");
          btnSineInverse.setBounds(x[7],y[3],wBtn,hBtn);;
-         btnSineInverse.setFont(btnfont);
+         btnSineInverse.setFont(btnFont);
          btnSineInverse.setCursor(new Cursor(Cursor.HAND_CURSOR));
          btnSineInverse.addActionListener(event -> {
               repaintFont();
@@ -780,7 +783,7 @@ public class Calculator {
         //Start of arc tan button
           btnArcTan = new JButton("aTan");
           btnArcTan.setBounds(x[7],y[4],wBtn,hBtn);
-          btnArcTan.setFont(btnfont);
+          btnArcTan.setFont(btnFont);
           btnArcTan.setCursor(new Cursor(Cursor.HAND_CURSOR));
           btnArcTan.addActionListener(event -> {
                repaintFont();
@@ -806,7 +809,7 @@ public class Calculator {
         
         btnExponential = new JButton("^");
         btnExponential.setBounds(x[6],y[2],wBtn,hBtn);
-        btnExponential.setFont(btnfont);
+        btnExponential.setFont(btnFont);
         btnExponential.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnExponential.addActionListener(event -> {
              repaintFont();
@@ -830,7 +833,7 @@ public class Calculator {
          //Start of Button X^x 
          btnXpowX = new JButton("X^x");
         btnXpowX.setBounds(x[8],y[1],wBtn,hBtn);
-        btnXpowX.setFont(btnfont);
+        btnXpowX.setFont(btnFont);
         btnXpowX.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnXpowX.addActionListener(event -> {
               repaintFont();
@@ -854,7 +857,7 @@ public class Calculator {
         //Start of hyperbolic sine function button
           btnSinH = new JButton("SinH");
           btnSinH.setBounds(x[8],y[2],wBtn,hBtn);
-          btnSinH.setFont(btnfont);
+          btnSinH.setFont(btnFont);
           btnSinH.setCursor(new Cursor(Cursor.HAND_CURSOR));
           btnSinH.addActionListener(event -> {
                repaintFont();
@@ -875,7 +878,7 @@ public class Calculator {
          //Start of hyperbolic tan function button
            btnTanH = new JButton("TanH");
            btnTanH.setBounds(x[8],y[3],wBtn,hBtn);
-           btnTanH.setFont(btnfont);
+           btnTanH.setFont(btnFont);
            btnTanH.setCursor(new Cursor(Cursor.HAND_CURSOR));
            btnTanH.addActionListener(event -> {
                 repaintFont();
@@ -897,7 +900,7 @@ public class Calculator {
       //Start of ans button
             btnans = new JButton("ans");
             btnans.setBounds(x[8],y[5],wBtn,hBtn);
-            btnans.setFont(btnfont);
+            btnans.setFont(btnFont);
             btnTanH.setCursor(new Cursor(Cursor.HAND_CURSOR));
             btnans.addActionListener(event -> {
                  repaintFont();
@@ -914,7 +917,7 @@ public class Calculator {
            
             btnCosh = new JButton("CosH");
             btnCosh.setBounds(x[8],y[4],wBtn,hBtn);;
-            btnCosh.setFont(btnfont);
+            btnCosh.setFont(btnFont);
             btnCosh.setCursor(new Cursor(Cursor.HAND_CURSOR));
             btnCosh.addActionListener(event -> {
                  repaintFont();
@@ -935,7 +938,7 @@ public class Calculator {
              //start of button nCr
              btnnCr = new JButton("nCr");
              btnnCr.setBounds(x[9],y[4],wBtn,hBtn);
-             btnnCr.setFont(btnfont);
+             btnnCr.setFont(btnFont);
              btnnCr.setCursor(new Cursor(Cursor.HAND_CURSOR));
              btnnCr.addActionListener(event -> {
                   repaintFont();
@@ -954,6 +957,32 @@ public class Calculator {
               });
               window.getContentPane().add(btnnCr);
              //end of button nCr 
+              
+              
+              btnCot = new JButton("Cot");
+              btnCot.setBounds(x[11],y[1],wBtn,hBtn);
+              btnCot.setFont(btnFont);
+              btnCot.setCursor(new Cursor(Cursor.HAND_CURSOR));
+              btnCot.addActionListener(event -> {
+                    repaintFont();
+
+                    if (go) {
+                              String displayText = inText.getText();
+                              Double value = Double.valueOf(displayText);
+                              Double radians = Math.toRadians(value);
+                              
+                              DecimalFormat format =  new DecimalFormat("##0.00"); 
+                              inText.setText("" + format.format(1.0/Math.tan(radians)));
+                              ans = "" + format.format(1.0/Math.tan(radians));
+                        }
+                        go = false;
+                        addWrite = false;
+
+        
+       });
+              window.getContentPane().add(btnCot);
+
+  
 
               btnCsc = new JButton("Csc");
               btnCsc.setBounds(x[11],y[3],wBtn,hBtn);
@@ -981,7 +1010,7 @@ public class Calculator {
             //start of button nPr
             btnnPr = new JButton("nPr");
             btnnPr.setBounds(x[9],y[3],wBtn,hBtn);
-            btnnPr.setFont(btnfont);
+            btnnPr.setFont(btnFont);
             btnnPr.setCursor(new Cursor(Cursor.HAND_CURSOR));
             btnnPr.addActionListener(event -> {
                  repaintFont();
@@ -1003,7 +1032,7 @@ public class Calculator {
              
              btnMax = new JButton("Max");
              btnMax.setBounds(x[9],y[1],wBtn,hBtn);
-             btnMax.setFont(btnfont);
+             btnMax.setFont(btnFont);
              btnMax.setCursor(new Cursor(Cursor.HAND_CURSOR));
              btnMax.addActionListener(event -> {
                   repaintFont();
@@ -1024,7 +1053,7 @@ public class Calculator {
               
               btnComma = new JButton(",");
               btnComma.setBounds(x[9],y[5],wBtn,hBtn);
-              btnComma.setFont(btnfont);
+              btnComma.setFont(btnFont);
               btnComma.setCursor(new Cursor(Cursor.HAND_CURSOR));
               btnComma.addActionListener(event -> {
                    repaintFont();
@@ -1042,7 +1071,7 @@ public class Calculator {
               
               btnMin = new JButton("Min");
               btnMin.setBounds(x[9],y[2],wBtn,hBtn);
-              btnMin.setFont(btnfont);
+              btnMin.setFont(btnFont);
               btnMin.setCursor(new Cursor(Cursor.HAND_CURSOR));
               btnMin.addActionListener(event -> {
                    repaintFont();
@@ -1064,7 +1093,7 @@ public class Calculator {
              //Start of Abs button
                btnAbs = new JButton("Abs");
                btnAbs.setBounds(x[10],y[1],wBtn,hBtn);
-               btnAbs.setFont(btnfont);
+               btnAbs.setFont(btnFont);
                btnAbs.setCursor(new Cursor(Cursor.HAND_CURSOR));
                btnAbs.addActionListener(event -> {
                     repaintFont();
@@ -1085,7 +1114,7 @@ public class Calculator {
                //Start of Button ->Dec 
                btnBinarytoDecimal = new JButton("->Dec");
                btnBinarytoDecimal.setBounds(x[10],y[2],wBtn,hBtn);
-               btnBinarytoDecimal.setFont(btnfont);
+               btnBinarytoDecimal.setFont(btnFont);
                btnBinarytoDecimal.setCursor(new Cursor(Cursor.HAND_CURSOR));
                btnBinarytoDecimal.addActionListener(event -> {
                     repaintFont();
@@ -1106,7 +1135,7 @@ public class Calculator {
                 //Start of nth root
                 btnNthRoot = new JButton("x\u221A");
                 btnNthRoot.setBounds(x[10],y[3],wBtn,hBtn);
-                btnNthRoot.setFont(btnfont);
+                btnNthRoot.setFont(btnFont);
                 btnNthRoot.setCursor(new Cursor(Cursor.HAND_CURSOR));
                 btnNthRoot.addActionListener(event -> {
                       repaintFont();
@@ -1128,7 +1157,7 @@ public class Calculator {
                   //Start of button e^x
                   btnEpowX = new JButton("e^x");
                   btnEpowX.setBounds(x[10],y[4],wBtn,hBtn);
-                  btnEpowX.setFont(btnfont);
+                  btnEpowX.setFont(btnFont);
                   btnEpowX.setCursor(new Cursor(Cursor.HAND_CURSOR));
                   btnEpowX.addActionListener(event -> {
                         repaintFont();
@@ -1156,7 +1185,7 @@ public class Calculator {
 
                     btnDecimalToBinary.setBounds(x[10],y[5],wBtn,hBtn);
 
-                    btnDecimalToBinary.setFont(btnfont);
+                    btnDecimalToBinary.setFont(btnFont);
 
                     btnDecimalToBinary.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
@@ -1187,7 +1216,7 @@ public class Calculator {
                     
         btnBMI = new JButton("BMI");
         btnBMI.setBounds(x[6],y[4],wBtn,hBtn);
-        btnBMI.setFont(btnfont);
+        btnBMI.setFont(btnFont);
         window.getContentPane().add(btnBMI);
         btnBMI.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -1360,7 +1389,11 @@ public class Calculator {
              btnEpowX.setBackground(null);
              btnDecimalToBinary.setBackground(null);
 
+             btnCot.setBackground(null);
+
+
              btnCsc.setBackground(null);
+
 
              
              bool = false;
@@ -1431,7 +1464,11 @@ public class Calculator {
              btnEpowX.setBackground(Color.ORANGE);
              btnDecimalToBinary.setBackground(Color.ORANGE);
 
+
+             btnCot.setBackground(Color.ORANGE);
+
              btnCsc.setBackground(Color.ORANGE);
+
 
              bool = true;
         }
