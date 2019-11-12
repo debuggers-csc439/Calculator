@@ -1,0 +1,60 @@
+   
+             // Beginning of round brackets
+             
+              //beginning of open bracket
+             btnOpenBracket = new JButton("(");
+             btnOpenBracket.setBounds(x[9],y[3],wBtn,hBtn);;
+             btnOpenBracket.setFont(btnfont);
+             btnOpenBracket.setCursor(new Cursor(Cursor.HAND_CURSOR));
+             btnOpenBracket.addActionListener(event -> {
+            	 repaintFont();
+                 if (addWrite) {
+                	 
+     					if (inText.getText().equals("0")) {
+     						inText.setText("");
+     					}
+     					inText.setText(inText.getText() + "(");
+     				}
+                 else {
+                     inText.setText("");
+                     addWrite = true;
+                 }
+                 go = true;
+             });
+             window.getContentPane().add(btnOpenBracket);
+             btnOpenBracket.setToolTipText("(");
+             btnOpenBracket.setOpaque(true);
+              
+              // end of open bracket
+              
+             
+             
+              //Beginning of close bracket
+              btnCloseBracket = new JButton(")");
+              btnCloseBracket.setBounds(x[9],y[4],wBtn,hBtn);;
+              btnCloseBracket.setFont(btnfont);
+              btnCloseBracket.setCursor(new Cursor(Cursor.HAND_CURSOR));
+              btnCloseBracket.addActionListener(event -> {
+                   repaintFont();
+                   if (addWrite) {
+                	   if (inText.getText().equals("0")) {
+    						inText.setText("");
+    					}
+    					inText.setText(inText.getText() + ")");
+    				
+                   } else {
+                       inText.setText("");
+                       addWrite = true;
+                   }
+                   go = true;
+               });
+               window.getContentPane().add(btnCloseBracket);
+               btnOpenBracket.setToolTipText("(");
+               btnOpenBracket.setOpaque(true);
+               
+               // end of close bracket 
+               
+               
+               
+              // end of round bracket
+               
